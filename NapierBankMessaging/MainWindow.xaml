@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NapierBankMessaging"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" 
+        Name="myMainWindow"
+        Height="700" 
+        Width="1400" MinWidth="515" MinHeight="534">
+    <Grid Name="MainGrid" SizeChanged="MainGrid_SizeChanged">
+        <Grid.LayoutTransform>
+            <ScaleTransform x:Name="ApplicationScaleTransform"
+                        CenterX="0"
+                        CenterY="0"
+                        ScaleX="{Binding ElementName=myMainWindow, Path=ScaleValue}"
+                        ScaleY="{Binding ElementName=myMainWindow, Path=ScaleValue}" />
+        </Grid.LayoutTransform>
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Height="230">
+            <TextBlock FontSize="20" Text="Napier Bank Messaging" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            <Button Content="Import JSON File" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        </Grid>
     </Grid>
 </Window>
