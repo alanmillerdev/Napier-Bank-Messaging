@@ -1,8 +1,11 @@
-﻿using NapierBankMessaging.ViewModels;
-using System;
+﻿using System;
 using System.Windows.Input;
-using NapierBankMessaging.Commands;
 using System.Windows;
+using NapierBankMessaging.Commands;
+using NapierBankMessaging.ViewModels;
+using NapierBankMessaging.Serialisation;
+using Microsoft.Win32;
+
 
 namespace NapierBankMessaging.Views
 {
@@ -26,7 +29,18 @@ namespace NapierBankMessaging.Views
 
         private void ImportBtnClick()
         {
-            MessageBox.Show("Functionality Working");
+            OpenFileDialog file = new OpenFileDialog();
+            file.Filter = "JSON Files (*.JSON)|*.JSON|All files (*.*)|*.*";
+            file.InitialDirectory = @"c:\";
+            file.FilterIndex = 1;
+            file.Multiselect = false;
+
+            if (file.ShowDialog() == true)
+            {
+                //TEMP for CSV Testing
+                var Instance = new ReadCSV();
+                Instance.CSVInput(file.FileName);
+            }
         }
     }
 }
