@@ -18,8 +18,8 @@
                         ScaleY="{Binding ElementName=myMainWindow, Path=ScaleValue}" />
         </Grid.LayoutTransform>
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Height="230">
-            <TextBlock FontSize="20" Text="Napier Bank Messaging" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-            <Button Content="Import JSON File" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <TextBlock FontSize="20" Text="{Binding HeaderText}" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            <Button x:Name="ImportBtn" Content="{Binding ImportBtnText}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding ImportJSONDataCommand}"/>
         </Grid>
     </Grid>
 </Window>
