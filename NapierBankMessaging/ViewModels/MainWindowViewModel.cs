@@ -38,7 +38,7 @@ namespace NapierBankMessaging.Views
             if (file.ShowDialog() == true)
             {
                 //TEMP for CSV Testing
-                var Instance = new ReadCSV();
+                var Instance = new CSVHandler();
                 Instance.CSVInput(file.FileName);
             }
         }

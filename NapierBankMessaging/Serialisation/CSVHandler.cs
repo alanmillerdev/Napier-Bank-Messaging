@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace NapierBankMessaging.Serialisation
 {
-    class ReadCSV
+    class CSVHandler
     {
 
         IDictionary<string, string> AbbreviationDictionary = new Dictionary<string, string>();
