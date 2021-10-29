@@ -15,8 +15,6 @@ namespace NapierBankMessaging.InputParser
         public string [] TXTParser(string[] TxtData)
         {
 
-            //TODO: Ask Zakwan about CSV Format Input
-
             foreach (string line in TxtData)
             {
                 if (line.Split()[0].StartsWith("+"))
@@ -49,6 +47,24 @@ namespace NapierBankMessaging.InputParser
 
         }
 
+        private string MessageIDBuilder(string type)
+        {
+
+            string MessageID;
+
+            var chars = "0123456789";
+            var stringChars = new char[8];
+            var random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            return MessageID = type + new String(stringChars);
+
+        }
+
         /*
         private string[] EmailParser(string preParseLine)
         {
@@ -69,7 +85,7 @@ namespace NapierBankMessaging.InputParser
         }
          */
 
-        private string TweetParser(string preParseLine)
+        private Tweet TweetParser(string preParseLine)
         {
 
             string[] splitLine = preParseLine.Split();
@@ -80,8 +96,9 @@ namespace NapierBankMessaging.InputParser
             string[] mentions;
             string[] hashtags;
 
-            //Username
-            username = splitLine[0];
+            //MessageID
+
+            messageID = MessageIDBuilder("T");
 
             //MessageBody
 
@@ -93,22 +110,40 @@ namespace NapierBankMessaging.InputParser
 
             messageBody = string.Join(" ", tempList.ToArray());
 
-            MessageBox.Show(messageBody);
+            //Username
+            username = splitLine[0];
 
-            //....
+            //Mentions
 
-            foreach (string val in preParseLine.Split())
+            List<String> tempMentionsList = new List<string>();
+            foreach (string val in messageBody.Split())
             {
 
-
-
+                if(val.StartsWith("@"))
+                {
+                    tempMentionsList.Add(val);
+                }
             }
 
-            //Tweet TweetParsed = new Tweet();
+            mentions = tempMentionsList.ToArray();
 
-            //return TweetParsed;
+            //Hashtags
 
-            return preParseLine;
+            List<String> tempHashtagList = new List<string>();
+            foreach (string val in messageBody.Split())
+            {
+
+                if (val.StartsWith("#"))
+                {
+                    tempHashtagList.Add(val);
+                }
+            }
+
+            hashtags = tempHashtagList.ToArray();
+
+            Tweet TweetParsed = new Tweet(username, hashtags, mentions, messageID, messageBody);
+
+            return TweetParsed;
         }
     }
 }
