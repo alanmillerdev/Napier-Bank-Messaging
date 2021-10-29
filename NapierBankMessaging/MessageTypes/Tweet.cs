@@ -24,6 +24,5 @@ namespace NapierBankMessaging.MessageTypes
             messageBody = msgBody;
 
         }
-
     }
 }

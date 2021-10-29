@@ -4,6 +4,7 @@ using System.Windows;
 using NapierBankMessaging.Commands;
 using NapierBankMessaging.ViewModels;
 using NapierBankMessaging.Serialisation;
+using NapierBankMessaging.InputParser;
 using Microsoft.Win32;
 
 
@@ -21,7 +22,7 @@ namespace NapierBankMessaging.Views
         {
             HeaderText = "Napier Bank Messaging";
 
-            ImportBtnText = "Import JSON File";
+            ImportBtnText = "Import txt File";
 
             ImportJSONDataCommand = new RelayCommand(ImportBtnClick);
 
@@ -30,7 +31,7 @@ namespace NapierBankMessaging.Views
         private void ImportBtnClick()
         {
             OpenFileDialog file = new OpenFileDialog();
-            file.Filter = "JSON Files (*.JSON)|*.JSON|All files (*.*)|*.*";
+            file.Filter = "txt Files (*.txt)|*.txt|All files (*.*)|*.*";
             file.InitialDirectory = @"c:\";
             file.FilterIndex = 1;
             file.Multiselect = false;
@@ -38,8 +39,14 @@ namespace NapierBankMessaging.Views
             if (file.ShowDialog() == true)
             {
                 //TEMP for CSV Testing
-                var Instance = new CSVHandler();
-                Instance.CSVInput(file.FileName);
+                //var Instance = new CSVHandler();
+                //Instance.AbbreviationInput(file.FileName);
+
+                var TxtHandlerInstance = new TXTHandler();
+                string[] returnedTxt = TxtHandlerInstance.TXTInput(file.FileName);
+                var ParserInstance = new TxtParser();
+                string[] parsedTxt = ParserInstance.TXTParser(returnedTxt);
+
             }
         }
     }

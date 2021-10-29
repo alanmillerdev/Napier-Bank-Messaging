@@ -10,7 +10,7 @@ namespace NapierBankMessaging.Serialisation
 
         IDictionary<string, string> AbbreviationDictionary = new Dictionary<string, string>();
 
-        public void CSVInput(string filePath)
+        public void AbbreviationInput(string filePath)
         {
 
             Regex CSVParser = new Regex(",");
