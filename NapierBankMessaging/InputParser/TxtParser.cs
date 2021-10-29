@@ -17,6 +17,7 @@ namespace NapierBankMessaging.InputParser
 
             foreach (string line in TxtData)
             {
+
                 if (line.Split()[0].StartsWith("+"))
                 {
 
@@ -76,19 +77,23 @@ namespace NapierBankMessaging.InputParser
             return parsedEmail;
         }
 
+        
+
         private string[] SMSParser(string preParseLine)
         {
 
             string[] SMSParsed;
 
+
+
             return SMSParsed;
         }
-         */
+         
+        */
+
 
         private Tweet TweetParser(string preParseLine)
         {
-
-            string[] splitLine = preParseLine.Split();
 
             string messageID;
             string messageBody;
@@ -96,52 +101,68 @@ namespace NapierBankMessaging.InputParser
             string[] mentions;
             string[] hashtags;
 
-            //MessageID
+            Tweet TweetParsed = new Tweet();
 
-            messageID = MessageIDBuilder("T");
+            string[] splitLine = preParseLine.Split();
 
-            //MessageBody
-
-            List<string> tempList = new List<string>();
-            for (int i = 1; i < splitLine.Length - 1; i++)
+            do
             {
-                tempList.Add(splitLine[i]);
-            }
+                //MessageID
 
-            messageBody = string.Join(" ", tempList.ToArray());
+                messageID = MessageIDBuilder("T");
 
-            //Username
-            username = splitLine[0];
+                //MessageBody
 
-            //Mentions
-
-            List<String> tempMentionsList = new List<string>();
-            foreach (string val in messageBody.Split())
-            {
-
-                if(val.StartsWith("@"))
+                List<string> tempList = new List<string>();
+                for (int i = 1; i < splitLine.Length - 1; i++)
                 {
-                    tempMentionsList.Add(val);
+                    tempList.Add(splitLine[i]);
                 }
-            }
 
-            mentions = tempMentionsList.ToArray();
+                messageBody = string.Join(" ", tempList.ToArray());
 
-            //Hashtags
-
-            List<String> tempHashtagList = new List<string>();
-            foreach (string val in messageBody.Split())
-            {
-
-                if (val.StartsWith("#"))
+                //Implement Properly
+                if (messageBody.Length > 140)
                 {
-                    tempHashtagList.Add(val);
+
+                    MessageBox.Show("Tweet body exceeds supported bounds.");
+                    break;
                 }
+
+                //Username
+                username = splitLine[0];
+
+                //Mentions
+
+                List<String> tempMentionsList = new List<string>();
+                foreach (string val in messageBody.Split())
+                {
+
+                    if (val.StartsWith("@"))
+                    {
+                        tempMentionsList.Add(val);
+                    }
+                }
+
+                mentions = tempMentionsList.ToArray();
+
+                //Hashtags
+
+                List<String> tempHashtagList = new List<string>();
+                foreach (string val in messageBody.Split())
+                {
+
+                    if (val.StartsWith("#"))
+                    {
+                        tempHashtagList.Add(val);
+                    }
+                }
+
+                hashtags = tempHashtagList.ToArray();
+
+                TweetParsed = new Tweet(username, hashtags, mentions, messageID, messageBody);
             }
-
-            hashtags = tempHashtagList.ToArray();
-
-            Tweet TweetParsed = new Tweet(username, hashtags, mentions, messageID, messageBody);
+            while (TweetParsed == null);
 
             return TweetParsed;
         }

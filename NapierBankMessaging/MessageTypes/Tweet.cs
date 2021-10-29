@@ -13,6 +13,15 @@ namespace NapierBankMessaging.MessageTypes
         public string [] hashtags {get; set;}
         public string[] mentions { get; set; }
 
+        public Tweet() : base()
+        {
+            tUsername = null;
+            hashtags = null;
+            mentions = null;
+            messageID = null;
+            messageBody = null;
+
+        }
 
         public Tweet(string username, string [] tags, string [] ments, string msgID, string msgBody) : base(msgID, msgBody)
         {
