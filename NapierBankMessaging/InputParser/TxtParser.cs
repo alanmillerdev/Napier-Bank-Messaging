@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Windows;
 using NapierBankMessaging.MessageTypes;
+using NapierBankMessaging.Serialisation;
 
 namespace NapierBankMessaging.InputParser
 {
@@ -66,6 +67,35 @@ namespace NapierBankMessaging.InputParser
 
         }
 
+        private string AbbreviationCheck(string msgBody)
+        {
+
+            var CSVHandlerInstance = new CSVHandler();
+
+            string[] splitMsgBody = msgBody.Split();
+
+            //Needs better implementation
+            string csvFilePath = @"\\napier-mail.napier.ac.uk\students\school of computing\user data\40478448\My Profile\Downloads\textwords.csv";
+
+            IDictionary<string, string> abbreviationList = CSVHandler.AbbreviationInput(csvFilePath);
+
+            foreach(string val in splitMsgBody)
+            {
+
+                if (abbreviationList.TryGetValue(val.ToUpper(), out string value))
+                {
+
+                    string replacementValue = "< " + value + " >";
+
+                    //splitMsgBody[Array.IndexOf(splitMsgBody, val.ToUpper())] = replacementValue;
+
+                    splitMsgBody = splitMsgBody.Select(s => s.Replace(val, replacementValue)).ToArray();
+
+                }
+            }
+            return msgBody = string.Join(" ", splitMsgBody);
+        }
+
         /*
         private string[] EmailParser(string preParseLine)
         {
@@ -77,20 +107,20 @@ namespace NapierBankMessaging.InputParser
             return parsedEmail;
         }
 
-        
-
         private string[] SMSParser(string preParseLine)
         {
 
+            string messageID;
+            string messageBody;
+
             string[] SMSParsed;
 
-
+            
 
             return SMSParsed;
         }
-         
+      
         */
-
 
         private Tweet TweetParser(string preParseLine)
         {
@@ -114,14 +144,14 @@ namespace NapierBankMessaging.InputParser
                 //MessageBody
 
                 List<string> tempList = new List<string>();
-                for (int i = 1; i < splitLine.Length - 1; i++)
+                for (int i = 1; i < splitLine.Length; i++)
                 {
                     tempList.Add(splitLine[i]);
                 }
 
                 messageBody = string.Join(" ", tempList.ToArray());
 
-                //Implement Properly
+                //Message Body Length Check
                 if (messageBody.Length > 140)
                 {
 
@@ -129,8 +159,19 @@ namespace NapierBankMessaging.InputParser
                     break;
                 }
 
+                //Message Body Text Speak Conversion
+                string checkResult = AbbreviationCheck(messageBody);
+
+                messageBody = checkResult;
+
                 //Username
                 username = splitLine[0];
+
+                if(username.Length > 16)
+                {
+                    MessageBox.Show("Twitter Username exceeds supported bounds.");
+                    break;
+                }
 
                 //Mentions
 

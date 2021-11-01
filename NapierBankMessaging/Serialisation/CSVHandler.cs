@@ -8,10 +8,10 @@ namespace NapierBankMessaging.Serialisation
     class CSVHandler
     {
 
-        IDictionary<string, string> AbbreviationDictionary = new Dictionary<string, string>();
-
-        public void AbbreviationInput(string filePath)
+        public static IDictionary<string, string> AbbreviationInput(string filePath)
         {
+
+            IDictionary<string, string> AbbreviationDictionary = new Dictionary<string, string>();
 
             Regex CSVParser = new Regex(",");
 
@@ -22,6 +22,9 @@ namespace NapierBankMessaging.Serialisation
                 string[] columns = CSVParser.Split(line);
                 AbbreviationDictionary.Add(columns[0], columns[1]);
             }
+
+            return AbbreviationDictionary;
+        
         }
     }
 }
