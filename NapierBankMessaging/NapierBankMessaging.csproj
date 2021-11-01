@@ -91,6 +91,7 @@
     <Compile Include="InputParser\TxtParser.cs" />
     <Compile Include="MessageTypes\Email.cs" />
     <Compile Include="MessageTypes\Message.cs" />
+    <Compile Include="MessageTypes\SIR.cs" />
     <Compile Include="MessageTypes\SMS.cs" />
     <Compile Include="MessageTypes\Tweet.cs" />
     <Compile Include="Serialisation\CSVHandler.cs" />

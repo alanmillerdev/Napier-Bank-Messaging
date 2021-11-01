@@ -22,7 +22,7 @@ namespace NapierBankMessaging.InputParser
                 if (line.Split()[0].StartsWith("+"))
                 {
 
-                    //SMSParser(line);
+                    SMSParser(line);
 
                 } else if (line.Split()[0].StartsWith("@"))
                 {
@@ -35,7 +35,7 @@ namespace NapierBankMessaging.InputParser
 
                         new MailAddress(line.Split()[0]);
 
-                        //EmailParser(line);
+                        EmailParser(line);
 
                     } catch (FormatException)
                     {
@@ -85,9 +85,7 @@ namespace NapierBankMessaging.InputParser
                 if (abbreviationList.TryGetValue(val.ToUpper(), out string value))
                 {
 
-                    string replacementValue = "< " + value + " >";
-
-                    //splitMsgBody[Array.IndexOf(splitMsgBody, val.ToUpper())] = replacementValue;
+                    string replacementValue = "<" + value + "> ";
 
                     splitMsgBody = splitMsgBody.Select(s => s.Replace(val, replacementValue)).ToArray();
 
@@ -96,31 +94,146 @@ namespace NapierBankMessaging.InputParser
             return msgBody = string.Join(" ", splitMsgBody);
         }
 
-        /*
-        private string[] EmailParser(string preParseLine)
-        {
-
-            string[] parsedEmail;
-
-
-
-            return parsedEmail;
-        }
-
-        private string[] SMSParser(string preParseLine)
+        private Email EmailParser(string preParseLine)
         {
 
             string messageID;
             string messageBody;
+            string emailAddress;
+            string emailSubject;
+            string[] quarantinedURLs;
 
-            string[] SMSParsed;
+            Email EmailParsed = new Email();
 
-            
+            string[] splitLine = preParseLine.Split();
+
+            string[] checkedMessageBody = null;
+
+            List<string> tempURLList = new List<string>();
+
+            do
+            {
+
+                //Email Subject
+                emailSubject = splitLine[1];
+
+                if(emailSubject == "SIR")
+                {
+
+                    SIRParser(preParseLine);
+
+                } else
+                {
+
+                    //MessageID
+
+                    messageID = MessageIDBuilder("S");
+
+                    //Email Address
+                    emailAddress = splitLine[0];
+
+                    //MessageBody
+
+                    List<string> tempList = new List<string>();
+                    for (int i = 2; i < splitLine.Length; i++)
+                    {
+                        tempList.Add(splitLine[i]);
+                    }
+
+                    messageBody = string.Join(" ", tempList.ToArray());
+
+                    //Message Body Length Check
+                    if (messageBody.Length > 1028)
+                    {
+
+                        MessageBox.Show("Tweet body exceeds supported bounds.");
+                        break;
+                    }
+
+                    //URL Check
+
+                    string[] splitMessageBody = messageBody.Split();
+
+                    foreach (string val in splitMessageBody)
+                    {
+                        if (val.StartsWith("http://") || val.StartsWith("https://"))
+                        {
+
+                            tempURLList.Add(val);
+
+                            string replacementValue = "<URL Quarantined>";
+
+                            checkedMessageBody = splitMessageBody.Select(s => s.Replace(val, replacementValue)).ToArray();
+
+                        }
+                    }
+
+                    messageBody = string.Join(" ", checkedMessageBody);
+
+                    //Quarantined URLs
+                    quarantinedURLs = tempURLList.ToArray();
+
+                    EmailParsed = new Email(emailAddress, emailSubject, quarantinedURLs, messageID, messageBody);
+
+                }
+            }
+            while (EmailParsed == null);
+
+            return EmailParsed;
+        }
+
+        private SIR SIRParser(string preParseLine)
+        {
+            SIR SIRParsed = new SIR();
+
+
+
+            return SIRParsed;
+        }
+
+        private SMS SMSParser(string preParseLine)
+        {
+
+            string messageID;
+            string messageBody;
+            string sender;
+
+            SMS SMSParsed = new SMS();
+
+            string[] splitLine = preParseLine.Split();
+
+            do
+            {
+
+                //MessageID
+
+                messageID = MessageIDBuilder("S");
+
+                //Sender
+                sender = splitLine[0];
+
+                //MessageBody
+
+                List<string> tempList = new List<string>();
+                for (int i = 1; i < splitLine.Length; i++)
+                {
+                    tempList.Add(splitLine[i]);
+                }
+
+                messageBody = string.Join(" ", tempList.ToArray());
+
+                //Message Body Text Speak Conversion
+                string checkResult = AbbreviationCheck(messageBody);
+
+                messageBody = checkResult;
+
+            }
+            while (SMSParsed == null);
+
+            SMSParsed = new SMS(sender, messageID, messageBody);
 
             return SMSParsed;
         }
-      
-        */
 
         private Tweet TweetParser(string preParseLine)
         {
