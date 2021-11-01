@@ -11,9 +11,9 @@ namespace NapierBankMessaging.InputParser
     class TxtParser
     {
 
-        string[] parsedData;
+        List<Message> ParsedMessages = new List<Message>();
 
-        public string [] TXTParser(string[] TxtData)
+        public List<Message> TXTParser(string[] TxtData)
         {
 
             foreach (string line in TxtData)
@@ -45,7 +45,7 @@ namespace NapierBankMessaging.InputParser
                 }
             }
 
-            return parsedData;
+            return ParsedMessages;
 
         }
 
@@ -94,7 +94,7 @@ namespace NapierBankMessaging.InputParser
             return msgBody = string.Join(" ", splitMsgBody);
         }
 
-        private Email EmailParser(string preParseLine)
+        private void EmailParser(string preParseLine)
         {
 
             string messageID;
@@ -127,7 +127,7 @@ namespace NapierBankMessaging.InputParser
 
                     //MessageID
 
-                    messageID = MessageIDBuilder("S");
+                    messageID = MessageIDBuilder("E");
 
                     //Email Address
                     emailAddress = splitLine[0];
@@ -175,14 +175,13 @@ namespace NapierBankMessaging.InputParser
 
                     EmailParsed = new Email(emailAddress, emailSubject, quarantinedURLs, messageID, messageBody);
 
+                    ParsedMessages.Add(EmailParsed);
                 }
             }
             while (EmailParsed == null);
-
-            return EmailParsed;
         }
 
-        private SIR SIRParser(string preParseLine)
+        private void SIRParser(string preParseLine)
         {
 
             string messageID;
@@ -207,7 +206,7 @@ namespace NapierBankMessaging.InputParser
 
                 //MessageID
 
-                messageID = MessageIDBuilder("S");
+                messageID = MessageIDBuilder("E");
 
                 //Email Address
                 emailAddress = splitLine[0];
@@ -258,12 +257,12 @@ namespace NapierBankMessaging.InputParser
 
             } while (SIRParsed == null);
 
-            SIRParsed = new SIR(date, sortCode, incident, emailAddress, emailSubject, urls, messageBody);
+            SIRParsed = new SIR(date, sortCode, incident, emailAddress, emailSubject, urls, messageID, messageBody);
 
-            return SIRParsed;
+            ParsedMessages.Add(SIRParsed);
         }
 
-        private SMS SMSParser(string preParseLine)
+        private void SMSParser(string preParseLine)
         {
 
             string messageID;
@@ -304,10 +303,10 @@ namespace NapierBankMessaging.InputParser
 
             SMSParsed = new SMS(sender, messageID, messageBody);
 
-            return SMSParsed;
+            ParsedMessages.Add(SMSParsed);
         }
 
-        private Tweet TweetParser(string preParseLine)
+        private void TweetParser(string preParseLine)
         {
 
             string messageID;
@@ -387,10 +386,11 @@ namespace NapierBankMessaging.InputParser
                 hashtags = tempHashtagList.ToArray();
 
                 TweetParsed = new Tweet(username, hashtags, mentions, messageID, messageBody);
+
+                ParsedMessages.Add(TweetParsed);
+
             }
             while (TweetParsed == null);
-
-            return TweetParsed;
         }
     }
 }

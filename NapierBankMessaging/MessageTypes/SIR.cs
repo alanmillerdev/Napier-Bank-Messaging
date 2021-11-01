@@ -15,9 +15,13 @@ namespace NapierBankMessaging.MessageTypes
 
         public SIR()
         {
+
+            sortCode = null;
+            Incident = null;
+
         }
 
-        public SIR(DateTime date, string sortCode, string incident, string emailAddress, string emailSubject, string[] urls, string messageBody)
+        public SIR(DateTime date, string sortCode, string incident, string emailAddress, string emailSubject, string[] urls, string messageID, string messageBody)
         {
             this.Date = date;
             this.sortCode = sortCode;
@@ -25,6 +29,7 @@ namespace NapierBankMessaging.MessageTypes
             this.eAddress = emailAddress;
             this.eSubject = emailSubject;
             this.qURLS = urls;
+            this.messageID = messageID;
             this.messageBody = messageBody;
         }
     }

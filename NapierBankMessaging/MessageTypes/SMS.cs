@@ -11,22 +11,22 @@ namespace NapierBankMessaging.MessageTypes
 
         public string pNumber { get; set; }
 
+        public SMS()
+        {
 
+            pNumber = null;
+            messageID = null;
+            messageBody = null;
+
+        }
 
         public SMS(string phoneNo, string msgID, string msgBody) : base(msgID, msgBody)
         {
 
-            pNumber = phoneNo;
-            messageID = msgID;
-            messageBody = msgBody;
-
-        }
-
-        public SMS()
-        {
-
-
+            this.pNumber = phoneNo;
+            this.messageID = msgID;
+            this.messageBody = msgBody;
 
         }
     }
-    }
+}

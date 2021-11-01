@@ -15,16 +15,23 @@ namespace NapierBankMessaging.MessageTypes
 
         public Email()
         {
+
+            eAddress = null;
+            eSubject = null;
+            qURLS = null;
+            messageID = null;
+            messageBody = null;
+
         }
 
         public Email(string email, string subject, string[] urls, string msgID, string msgBody) : base(msgID, msgBody)
         {
 
-            eAddress = email;
-            eSubject = subject;
-            qURLS = urls;
-            messageID = msgID;
-            messageBody = msgBody;
+            this.eAddress = email;
+            this.eSubject = subject;
+            this.qURLS = urls;
+            this.messageID = msgID;
+            this.messageBody = msgBody;
 
         }
 

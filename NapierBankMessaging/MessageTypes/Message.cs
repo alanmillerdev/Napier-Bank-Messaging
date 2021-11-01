@@ -15,13 +15,16 @@ namespace NapierBankMessaging.MessageTypes
         public Message()
         {
 
+            messageID = null;
+            messageBody = null;
+
         }
 
         public Message(string msgID, string msgBody)
         {
 
-            messageID = msgID;
-            messageBody = msgBody;
+            this.messageID = msgID;
+            this.messageBody = msgBody;
 
         }
     }

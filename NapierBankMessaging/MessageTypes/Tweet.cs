@@ -26,11 +26,11 @@ namespace NapierBankMessaging.MessageTypes
         public Tweet(string username, string [] tags, string [] ments, string msgID, string msgBody) : base(msgID, msgBody)
         {
 
-            tUsername = username;
-            hashtags = tags;
-            mentions = ments;
-            messageID = msgID;
-            messageBody = msgBody;
+            this.tUsername = username;
+            this.hashtags = tags;
+            this.mentions = ments;
+            this.messageID = msgID;
+            this.messageBody = msgBody;
 
         }
     }

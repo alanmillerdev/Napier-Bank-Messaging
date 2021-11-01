@@ -6,7 +6,8 @@ using NapierBankMessaging.ViewModels;
 using NapierBankMessaging.Serialisation;
 using NapierBankMessaging.InputParser;
 using Microsoft.Win32;
-
+using System.Collections.Generic;
+using NapierBankMessaging.MessageTypes;
 
 namespace NapierBankMessaging.Views
 {
@@ -45,8 +46,8 @@ namespace NapierBankMessaging.Views
                 var TxtHandlerInstance = new TXTHandler();
                 string[] returnedTxt = TxtHandlerInstance.TXTInput(file.FileName);
                 var ParserInstance = new TxtParser();
-                string[] parsedTxt = ParserInstance.TXTParser(returnedTxt);
-
+                List<Message> returnedMessages = ParserInstance.TXTParser(returnedTxt);
+                Console.WriteLine();
             }
         }
     }
