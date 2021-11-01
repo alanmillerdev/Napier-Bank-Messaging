@@ -17,16 +17,15 @@ namespace NapierBankMessaging.MessageTypes
         {
         }
 
-        public SIR(DateTime incidentDate, string sortcode, string incident, string email, string subject, string[] urls, string msgID, string msgBody) : base(email, subject, urls, msgID, msgBody)
+        public SIR(DateTime date, string sortCode, string incident, string emailAddress, string emailSubject, string[] urls, string messageBody)
         {
-            Date = incidentDate;
-            sortCode = sortcode;
-            Incident = incident;
-            eAddress = email;
-            eSubject = subject;
-            qURLS = urls;
-            messageID = msgID;
-            messageBody = msgBody;
+            this.Date = date;
+            this.sortCode = sortCode;
+            this.Incident = incident;
+            this.eAddress = emailAddress;
+            this.eSubject = emailSubject;
+            this.qURLS = urls;
+            this.messageBody = messageBody;
         }
     }
 }

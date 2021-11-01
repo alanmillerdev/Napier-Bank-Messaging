@@ -184,9 +184,81 @@ namespace NapierBankMessaging.InputParser
 
         private SIR SIRParser(string preParseLine)
         {
+
+            string messageID;
+            string messageBody;
+            string[] urls;
+            string emailAddress;
+            string emailSubject;
+            DateTime date;
+            string sortCode;
+            string incident;
+
             SIR SIRParsed = new SIR();
 
+            string[] checkedMessageBody = null;
 
+            List<string> tempURLList = new List<string>();
+
+            string[] splitLine = preParseLine.Split();
+
+            do
+            {
+
+                //MessageID
+
+                messageID = MessageIDBuilder("S");
+
+                //Email Address
+                emailAddress = splitLine[0];
+
+                //Subject
+                emailSubject = splitLine[1];
+
+                //Date
+                date = DateTime.Parse(splitLine[2]);
+
+                //SortCode
+                sortCode = splitLine[3];
+
+                //Incident
+                incident = splitLine[4];
+
+                //MessageBody
+                List<string> tempList = new List<string>();
+                for (int i = 5; i < splitLine.Length; i++)
+                {
+                    tempList.Add(splitLine[i]);
+                }
+
+                messageBody = string.Join(" ", tempList.ToArray());
+
+                //URL Check
+
+                string[] splitMessageBody = messageBody.Split();
+
+                foreach (string val in splitMessageBody)
+                {
+                    if (val.StartsWith("http://") || val.StartsWith("https://"))
+                    {
+
+                        tempURLList.Add(val);
+
+                        string replacementValue = "<URL Quarantined>";
+
+                        checkedMessageBody = splitMessageBody.Select(s => s.Replace(val, replacementValue)).ToArray();
+
+                    }
+                }
+
+                messageBody = string.Join(" ", checkedMessageBody);
+
+                //Quarantined URLs
+                urls = tempURLList.ToArray();
+
+            } while (SIRParsed == null);
+
+            SIRParsed = new SIR(date, sortCode, incident, emailAddress, emailSubject, urls, messageBody);
 
             return SIRParsed;
         }
