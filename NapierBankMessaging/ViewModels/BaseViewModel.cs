@@ -12,6 +12,5 @@ namespace NapierBankMessaging.ViewModels
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propertyChanged));
         }
-
     }
 }

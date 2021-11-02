@@ -1,0 +1,14 @@
+﻿<Page x:Class="NapierBankMessaging.Views.InputDataViaTxtFilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NapierBankMessaging.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1200"
+      Title="InputDataViaTxtFilePage">
+
+    <Grid>
+        <Button x:Name="MainMenuBtn" Content="Return to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="940,10,0,0" FontSize="24" Click="MainMenuBtn_Click"/>
+    </Grid>
+</Page>

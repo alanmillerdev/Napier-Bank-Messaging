@@ -99,6 +99,24 @@
     <Compile Include="Serialisation\TXTHandler.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\InputDataPage.xaml.cs">
+      <DependentUpon>InputDataPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InputDataViaTxtFilePage.xaml.cs">
+      <DependentUpon>InputDataViaTxtFilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenuPage.xaml.cs">
+      <DependentUpon>MainMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewQuarantineListPage.xaml.cs">
+      <DependentUpon>ViewQuarantineListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewSignificantIncidentsPage.xaml.cs">
+      <DependentUpon>ViewSignificantIncidentsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewTweetTrendsPage.xaml.cs">
+      <DependentUpon>ViewTweetTrendsPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,6 +129,30 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\InputDataPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InputDataViaTxtFilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewQuarantineListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewSignificantIncidentsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewTweetTrendsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -142,7 +184,6 @@
   <ItemGroup>
     <Folder Include="Database\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

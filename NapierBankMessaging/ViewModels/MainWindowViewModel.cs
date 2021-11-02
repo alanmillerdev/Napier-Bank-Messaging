@@ -43,7 +43,6 @@ namespace NapierBankMessaging.Views
                 string[] returnedTxt = TxtHandlerInstance.TXTInput(file.FileName);
                 var ParserInstance = new TxtParser();
                 List<Message> returnedMessages = ParserInstance.TXTParser(returnedTxt);
-          
             }
         }
     }
