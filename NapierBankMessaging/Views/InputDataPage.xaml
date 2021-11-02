@@ -8,7 +8,30 @@
       d:DesignHeight="600" d:DesignWidth="1200"
       Title="InputDataPage">
 
-    <Grid>
-        <Button x:Name="MainMenuBtn" Content="Return to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="940,10,0,0" FontSize="24" Click="MainMenuBtn_Click"/>
+    <Grid Background="White">
+        <Button x:Name="MainMenuBtn" Content="Return to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="915,16,0,0" FontSize="24" Click="MainMenuBtn_Click"/>
+        <Label Content="Data Input" VerticalAlignment="Top" FontSize="24" Margin="539,10,539,0"/>
+        <Label Content="Input" VerticalAlignment="Top" FontSize="24" Margin="569,68,563,0"/>
+        <Label Content="Output" VerticalAlignment="Top" FontSize="24" Margin="969,68,147,0"/>
+        <Label Content="Instructions" VerticalAlignment="Top" FontSize="24" Margin="130,68,934,0"/>
+        <TextBox HorizontalAlignment="Left" Height="427" Margin="27,110,0,0" TextWrapping="Wrap" Text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged." VerticalAlignment="Top" Width="345" FontSize="24" IsEnabled="False"/>
+
+        <!--Message Header Input-->
+        <Label Content="Message Header:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="443,110,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="445,133,0,0" FontSize="24"/>
+
+        <!--Message Body Input-->
+        <Label Content="Message Body:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="445,172,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="287" Margin="445,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" FontSize="24"/>
+
+        <!--Message Header Output-->
+        <Label Content="Message Header:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="855,110,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="855,133,0,0" FontSize="24" IsEnabled="False"/>
+
+        <!--Message Body Output-->
+        <Label Content="Message Body:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="855,175,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="338" Margin="855,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" FontSize="24" IsEnabled="False"/>
+        <Button x:Name="SubmitInputBtn" Content="Submit Data" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" Margin="508,501,0,0" FontSize="24"/>
+
     </Grid>
 </Page>

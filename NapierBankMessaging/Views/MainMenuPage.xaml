@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1200"
       Title="Napier Bank Messaging Service - Main Menu">
-    <Grid>
+    <Grid Background="White">
         <Label Content="Good {TimeOfDay}, what would you like to do today?" VerticalAlignment="Top" Margin="314,52,314,0" FontSize="24"/>
         <Label Content="Main Menu" VerticalAlignment="Top" Margin="535,99,535,0" FontSize="24"/>
         <Button x:Name="InputDataNavigationBtn" Content="Input Data" VerticalAlignment="Top" Margin="461,157,460,0" FontSize="24" Click="InputDataNavigationBtn_Click"/>

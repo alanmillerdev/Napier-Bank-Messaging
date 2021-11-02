@@ -93,7 +93,7 @@ namespace NapierBankMessaging.InputParser
                 if (abbreviationList.TryGetValue(val.ToUpper(), out string value))
                 {
 
-                    string replacementValue = "<" + value + "> ";
+                    string replacementValue = "<" + value + ">";
 
                     splitMsgBody = splitMsgBody.Select(s => s.Replace(val, replacementValue)).ToArray();
 

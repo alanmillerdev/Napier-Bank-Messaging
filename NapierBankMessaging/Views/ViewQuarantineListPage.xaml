@@ -8,7 +8,14 @@
       d:DesignHeight="600" d:DesignWidth="1200"
       Title="ViewQuarantineListPage">
 
-    <Grid>
-        <Button x:Name="MainMenuBtn" Content="Return to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="940,10,0,0" FontSize="24" Click="MainMenuBtn_Click"/>
+    <Grid Background="White">
+        <Button x:Name="MainMenuBtn" Content="Return to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="927,16,0,0" FontSize="24" Click="MainMenuBtn_Click"/>
+
+        <!--Header Labels-->
+        <Label Content="Quarantine List" VerticalAlignment="Top" FontSize="24" Margin="513,10,513,0"/>
+
+        <!--Datagrid-->
+        <DataGrid Height="528" VerticalAlignment="Top" Margin="382,57,382,0" IsEnabled="False"/>
+
     </Grid>
 </Page>

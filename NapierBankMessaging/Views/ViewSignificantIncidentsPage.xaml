@@ -8,7 +8,14 @@
       d:DesignHeight="600" d:DesignWidth="1200"
       Title="ViewSignificantIncidentsPage">
 
-    <Grid>
-        <Button x:Name="MainMenuBtn" Content="Return to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="940,10,0,0" FontSize="24" Click="MainMenuBtn_Click"/>
+    <Grid Background="White">
+        <Button x:Name="MainMenuBtn" Content="Return to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="925,16,0,0" FontSize="24" Click="MainMenuBtn_Click" RenderTransformOrigin="0.433,0.851"/>
+
+        <!--Header Labels-->
+        <Label Content="Significant Incidents" VerticalAlignment="Top" FontSize="24" Margin="490,10,489,0"/>
+
+        <!--Datagrid-->
+        <DataGrid HorizontalAlignment="Left" Height="533" VerticalAlignment="Top" Width="1180" Margin="10,57,0,0" IsEnabled="False"/>
+
     </Grid>
 </Page>

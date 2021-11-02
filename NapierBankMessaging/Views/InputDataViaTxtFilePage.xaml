@@ -8,7 +8,37 @@
       d:DesignHeight="600" d:DesignWidth="1200"
       Title="InputDataViaTxtFilePage">
 
-    <Grid>
-        <Button x:Name="MainMenuBtn" Content="Return to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="940,10,0,0" FontSize="24" Click="MainMenuBtn_Click"/>
+    <Grid Background="White">
+        <Button x:Name="MainMenuBtn" Content="Return to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="928,16,0,0" FontSize="24" Click="MainMenuBtn_Click"/>
+        
+        <!--Header Labels-->
+        <Label Content="Data Input Via Text File" VerticalAlignment="Top" FontSize="24" Margin="474,10,475,0"/>
+        <Label Content="Output" VerticalAlignment="Top" FontSize="24" Margin="557,68,557,0"/>
+        <Label Content="Information" VerticalAlignment="Top" FontSize="24" Margin="908,68,155,0"/>
+        <Label Content="Instructions" VerticalAlignment="Top" FontSize="24" Margin="130,68,934,0"/>
+        
+        <!--Instructions-->
+        <TextBox HorizontalAlignment="Left" Height="341" Margin="27,110,0,0" TextWrapping="Wrap" Text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. " VerticalAlignment="Top" Width="345" FontSize="24" IsEnabled="False"/>
+
+        <!--Message Header Output-->
+        <Label Content="Message ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="443,110,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="445,133,0,0" FontSize="24" IsEnabled="False"/>
+
+        <!--Input Section-->
+        <Label Content="Input" VerticalAlignment="Top" FontSize="24" Margin="153,456,978,0"/>
+        <Button x:Name="TxtFileInput" Content="Upload a Txt File" HorizontalAlignment="Left" VerticalAlignment="Top" Width="213" Margin="87,506,0,0" FontSize="24"/>
+        
+        <!--Message Body Output-->
+        <Label Content="Message Body:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="445,172,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="252" Margin="445,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" FontSize="24" IsEnabled="False"/>
+        
+        <!--Controls-->
+        <Label Content="Controls" VerticalAlignment="Top" FontSize="24" Margin="543,440,557,0"/>
+        <Button x:Name="NextMessageBtn" Content="Next Message" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Margin="508,478,0,0" FontSize="24"/>
+        <Button x:Name="BackMessageBtn" Content="Go Back a Message" HorizontalAlignment="Left" VerticalAlignment="Top" Width="213" Margin="487,519,0,0" FontSize="24"/>
+
+        <!--Information Section-->
+        <Label Content="Number of Messages Parsed: 0" VerticalAlignment="Top" FontSize="18" Margin="860,115,74,0"/>
+
     </Grid>
 </Page>
