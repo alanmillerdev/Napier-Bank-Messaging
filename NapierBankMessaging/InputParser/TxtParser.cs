@@ -83,7 +83,7 @@ namespace NapierBankMessaging.InputParser
             string[] splitMsgBody = msgBody.Split();
 
             //Needs better implementation
-            string csvFilePath = @"";
+            string csvFilePath = @"C:\Users\alanm\Downloads\textwords.csv";
 
             IDictionary<string, string> abbreviationList = CSVHandler.AbbreviationInput(csvFilePath);
 
