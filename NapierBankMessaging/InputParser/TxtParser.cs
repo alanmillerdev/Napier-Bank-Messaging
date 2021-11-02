@@ -8,7 +8,15 @@ using NapierBankMessaging.Serialisation;
 
 namespace NapierBankMessaging.InputParser
 {
-    class TxtParser
+
+    //TODO: Convert Parser to return one parsed message at a time
+    //Output object to JSON file at the same time for storage.
+    //Display parsed result via UI.
+    //This approach will allow for conversion of message with ease for manual input and file based input
+    //Once this is complete implement unit tests for serialisation and parsing
+    //Finally merge branches then start working on the UI.
+
+    public class TxtParser
     {
 
         List<Message> ParsedMessages = new List<Message>();
@@ -49,7 +57,7 @@ namespace NapierBankMessaging.InputParser
 
         }
 
-        private string MessageIDBuilder(string type)
+        public string MessageIDBuilder(string type)
         {
 
             string MessageID;
@@ -75,7 +83,7 @@ namespace NapierBankMessaging.InputParser
             string[] splitMsgBody = msgBody.Split();
 
             //Needs better implementation
-            string csvFilePath = @"\\napier-mail.napier.ac.uk\students\school of computing\user data\40478448\My Profile\Downloads\textwords.csv";
+            string csvFilePath = @"";
 
             IDictionary<string, string> abbreviationList = CSVHandler.AbbreviationInput(csvFilePath);
 

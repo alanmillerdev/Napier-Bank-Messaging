@@ -39,15 +39,13 @@ namespace NapierBankMessaging.Views
 
             if (file.ShowDialog() == true)
             {
-                //TEMP for CSV Testing
-                //var Instance = new CSVHandler();
-                //Instance.AbbreviationInput(file.FileName);
-
                 var TxtHandlerInstance = new TXTHandler();
                 string[] returnedTxt = TxtHandlerInstance.TXTInput(file.FileName);
                 var ParserInstance = new TxtParser();
                 List<Message> returnedMessages = ParserInstance.TXTParser(returnedTxt);
+
                 Console.WriteLine();
+
             }
         }
     }
