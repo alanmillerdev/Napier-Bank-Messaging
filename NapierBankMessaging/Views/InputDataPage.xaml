@@ -18,20 +18,22 @@
 
         <!--Message Header Input-->
         <Label Content="Message Header:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="443,110,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="445,133,0,0" FontSize="24"/>
+        <TextBox x:Name="MessageHeaderInput" HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="445,133,0,0" FontSize="24"/>
 
         <!--Message Body Input-->
         <Label Content="Message Body:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="445,172,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="287" Margin="445,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" FontSize="24"/>
+        <TextBox x:Name="MessageBodyInput" HorizontalAlignment="Left" Height="287" Margin="445,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" FontSize="24"/>
+
+        <!--Submit Button-->
+        <Button x:Name="SubmitInputBtn" Content="Submit Data" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" Margin="508,501,0,0" FontSize="24" Click="SubmitInputBtn_Click"/>
 
         <!--Message Header Output-->
-        <Label Content="Message Header:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="855,110,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="855,133,0,0" FontSize="24" IsEnabled="False"/>
+        <Label Content="Message ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="855,110,0,0"/>
+        <TextBox x:Name="MessageIDOutput" HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="855,133,0,0" FontSize="24" IsEnabled="False"/>
 
         <!--Message Body Output-->
         <Label Content="Message Body:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="855,175,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="338" Margin="855,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" FontSize="24" IsEnabled="False"/>
-        <Button x:Name="SubmitInputBtn" Content="Submit Data" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" Margin="508,501,0,0" FontSize="24"/>
-
+        <TextBox x:Name="MessageBodyOutput" HorizontalAlignment="Left" Height="338" Margin="855,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" FontSize="24" IsEnabled="False"/>
+       
     </Grid>
 </Page>

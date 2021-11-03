@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NapierBankMessaging.MessageTypes;
+using NapierBankMessaging.SystemController;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,11 @@ namespace NapierBankMessaging.Views
     /// </summary>
     public partial class InputDataPage : Page
     {
+
+        private Controller ControllerInstance = new Controller();
+
+        private List<Message> MessageList = new List<Message>();
+
         public InputDataPage()
         {
             InitializeComponent();
@@ -28,6 +35,20 @@ namespace NapierBankMessaging.Views
         private void MainMenuBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new MainMenuPage());
+        }
+
+        private void SubmitInputBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageHeaderInput.Text == string.Empty || MessageBodyInput.Text == string.Empty)
+            {
+                MessageBox.Show("Please Input Values for both the Message Header and Message Body");
+            }
+            else
+            {
+                MessageList = ControllerInstance.ManualInputMessageParser(MessageHeaderInput.Text, MessageBodyInput.Text);
+                MessageIDOutput.Text = MessageList[0].messageID;
+                MessageBodyOutput.Text = MessageList[0].messageBody;
+            }
         }
     }
 }

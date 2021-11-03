@@ -88,6 +88,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="SystemController\Controller.cs" />
     <Compile Include="InputParser\TxtParser.cs" />
     <Compile Include="MessageTypes\Email.cs" />
     <Compile Include="MessageTypes\Message.cs" />

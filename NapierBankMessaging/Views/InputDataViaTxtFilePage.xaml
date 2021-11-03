@@ -22,23 +22,23 @@
 
         <!--Message Header Output-->
         <Label Content="Message ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="443,110,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="445,133,0,0" FontSize="24" IsEnabled="False"/>
+        <TextBox x:Name="MessageIDOutput" HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="445,133,0,0" FontSize="24" IsEnabled="False"/>
 
         <!--Input Section-->
         <Label Content="Input" VerticalAlignment="Top" FontSize="24" Margin="153,456,978,0"/>
-        <Button x:Name="TxtFileInput" Content="Upload a Txt File" HorizontalAlignment="Left" VerticalAlignment="Top" Width="213" Margin="87,506,0,0" FontSize="24"/>
+        <Button x:Name="TxtFileInput" Content="Upload a Txt File" HorizontalAlignment="Left" VerticalAlignment="Top" Width="213" Margin="87,506,0,0" FontSize="24" Click="TxtFileInput_Click"/>
         
         <!--Message Body Output-->
         <Label Content="Message Body:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="445,172,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="252" Margin="445,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" FontSize="24" IsEnabled="False"/>
+        <TextBox x:Name="MessageBodyOutput" HorizontalAlignment="Left" Height="252" Margin="445,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" FontSize="24" IsEnabled="False"/>
         
         <!--Controls-->
         <Label Content="Controls" VerticalAlignment="Top" FontSize="24" Margin="543,440,557,0"/>
-        <Button x:Name="NextMessageBtn" Content="Next Message" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Margin="508,478,0,0" FontSize="24"/>
-        <Button x:Name="BackMessageBtn" Content="Go Back a Message" HorizontalAlignment="Left" VerticalAlignment="Top" Width="213" Margin="487,519,0,0" FontSize="24"/>
+        <Button x:Name="NextMessageBtn" Content="Next Message" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" Margin="508,478,0,0" FontSize="24" Click="NextMessageBtn_Click"/>
+        <Button x:Name="BackMessageBtn" Content="Go Back a Message" HorizontalAlignment="Left" VerticalAlignment="Top" Width="213" Margin="487,519,0,0" FontSize="24" Click="BackMessageBtn_Click"/>
 
         <!--Information Section-->
-        <Label Content="Number of Messages Parsed: 0" VerticalAlignment="Top" FontSize="18" Margin="860,115,74,0"/>
+        <Label x:Name="NumberOfMsgParsedLbl" Content="Number of Messages Parsed: 0" VerticalAlignment="Top" FontSize="18" Margin="860,115,74,0"/>
 
     </Grid>
 </Page>

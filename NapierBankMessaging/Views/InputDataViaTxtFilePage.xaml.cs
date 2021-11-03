@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NapierBankMessaging.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,21 +14,72 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using NapierBankMessaging.SystemController;
+using NapierBankMessaging.MessageTypes;
+
 namespace NapierBankMessaging.Views
 {
-    /// <summary>
-    /// Interaction logic for InputDataViaTxtFilePage.xaml
-    /// </summary>
     public partial class InputDataViaTxtFilePage : Page
     {
+        private Controller ControllerInstance = new Controller();
+
+        private List<Message> MessageList = new List<Message>();
+
+        private int currentMessageIndex = 0;
+
+        private int maxMessageIndex = 0;
+
         public InputDataViaTxtFilePage()
         {
             InitializeComponent();
+
         }
 
         private void MainMenuBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new MainMenuPage());
+        }
+
+        private void TxtFileInput_Click(object sender, RoutedEventArgs e)
+        {
+            MessageList = ControllerInstance.TxtFileUploadMessageParser();
+            
+            //Initial Output
+            MessageIDOutput.Text = MessageList[0].messageID;
+            MessageBodyOutput.Text = MessageList[0].messageBody;
+
+            //Information Output
+            NumberOfMsgParsedLbl.Content = "Number of Messages Parsed: " + MessageList.Count;
+
+            //Max Message Count Update
+            maxMessageIndex = MessageList.Count;
+        }
+
+        private void NextMessageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentMessageIndex >= maxMessageIndex)
+            {
+                MessageBox.Show("No more messages to show!");
+            } else
+            {
+                MessageIDOutput.Text = MessageList[currentMessageIndex].messageID;
+                MessageBodyOutput.Text = MessageList[currentMessageIndex].messageBody;
+                currentMessageIndex++;
+            }
+        }
+
+        private void BackMessageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentMessageIndex <= 0)
+            {
+                MessageBox.Show("No more messages to show!");
+            }
+            else
+            {
+                currentMessageIndex--;
+                MessageIDOutput.Text = MessageList[currentMessageIndex].messageID;
+                MessageBodyOutput.Text = MessageList[currentMessageIndex].messageBody;
+            }
         }
     }
 }

@@ -21,6 +21,8 @@ namespace NapierBankMessaging.InputParser
 
         List<Message> ParsedMessages = new List<Message>();
 
+        Random random = new Random();
+
         public List<Message> TXTParser(string[] TxtData)
         {
 
@@ -64,10 +66,10 @@ namespace NapierBankMessaging.InputParser
 
             var chars = "0123456789";
             var stringChars = new char[8];
-            var random = new Random();
 
             for (int i = 0; i < stringChars.Length; i++)
             {
+                
                 stringChars[i] = chars[random.Next(chars.Length)];
             }
 
