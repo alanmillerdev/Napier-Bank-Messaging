@@ -23,13 +23,15 @@ namespace NapierBankMessaging.Views
     public partial class InputDataPage : Page
     {
 
-        private Controller ControllerInstance = new Controller();
+        private Controller ControllerInstance;
 
         private List<Message> MessageList = new List<Message>();
 
-        public InputDataPage()
+        public InputDataPage(Controller controllerInstance)
         {
             InitializeComponent();
+
+            ControllerInstance = controllerInstance;
         }
 
         private void MainMenuBtn_Click(object sender, RoutedEventArgs e)

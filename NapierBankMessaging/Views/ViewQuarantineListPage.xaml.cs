@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NapierBankMessaging.SystemController;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,14 @@ namespace NapierBankMessaging.Views
     /// </summary>
     public partial class ViewQuarantineListPage : Page
     {
-        public ViewQuarantineListPage()
+
+        Controller ControllerInstance; 
+
+        public ViewQuarantineListPage(SystemController.Controller controllerInstance)
         {
             InitializeComponent();
+
+            ControllerInstance = controllerInstance;
         }
 
         private void MainMenuBtn_Click(object sender, RoutedEventArgs e)

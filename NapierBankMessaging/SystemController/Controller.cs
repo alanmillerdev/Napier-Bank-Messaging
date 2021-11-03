@@ -12,6 +12,23 @@ namespace NapierBankMessaging.SystemController
 {
     public class Controller
     {
+        JSONHandler jsonHandler = new JSONHandler();
+
+        List<Message> MessageList = new List<Message>();
+
+        public Controller()
+        {
+            MessageList = jsonHandler.ReadApplicationData();
+        }
+
+        public List<Message> loadApplicationData()
+        {
+
+            MessageList = jsonHandler.ReadApplicationData();
+
+            return MessageList;
+
+        }
 
         public List<Message> TxtFileUploadMessageParser()
         {
@@ -32,7 +49,7 @@ namespace NapierBankMessaging.SystemController
                 returnedMessages = ParserInstance.TXTParser(returnedTxt);
             }
 
-            //Output Data to JSON here.
+            //jsonHandler.JSONOutput(returnedMessages);
 
             return returnedMessages;
         }
@@ -47,5 +64,7 @@ namespace NapierBankMessaging.SystemController
 
             return messageReturn;
         }
+
+        
     }
 }

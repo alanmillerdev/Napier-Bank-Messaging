@@ -8,17 +8,12 @@ using NapierBankMessaging.InputParser;
 using Microsoft.Win32;
 using System.Collections.Generic;
 using NapierBankMessaging.MessageTypes;
+using NapierBankMessaging.SystemController;
 
 namespace NapierBankMessaging.Views
 {
-    class MainWindowViewModel : BaseViewModel
+    class MainViewModel : BaseViewModel
     {
 
-        public MainWindowViewModel()
-        {
-
-
-
-        }
     }
 }

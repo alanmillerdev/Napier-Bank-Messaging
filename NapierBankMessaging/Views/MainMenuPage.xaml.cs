@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NapierBankMessaging.SystemController;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,6 +10,9 @@ namespace NapierBankMessaging.Views
     /// </summary>
     public partial class MainMenuPage : Page
     {
+
+        private Controller ControllerInstance = new Controller();
+
         public MainMenuPage()
         {
             InitializeComponent();
@@ -16,27 +20,27 @@ namespace NapierBankMessaging.Views
 
         private void InputDataNavigationBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new InputDataPage());
+            this.NavigationService.Navigate(new InputDataPage(ControllerInstance));
         }
 
         private void InputDataViaTxtFileNavigationBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new InputDataViaTxtFilePage());
+            this.NavigationService.Navigate(new InputDataViaTxtFilePage(ControllerInstance));
         }
 
         private void ViewSignificantIncidentsNavigationBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ViewSignificantIncidentsPage());
+            this.NavigationService.Navigate(new ViewSignificantIncidentsPage(ControllerInstance));
         }
 
         private void ViewTweetTrendsNavigationBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ViewTweetTrendsPage());
+            this.NavigationService.Navigate(new ViewTweetTrendsPage(ControllerInstance));
         }
 
         private void ViewQuarantineNavigationBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ViewQuarantineListPage());
+            this.NavigationService.Navigate(new ViewQuarantineListPage(ControllerInstance));
         }
     }
 }

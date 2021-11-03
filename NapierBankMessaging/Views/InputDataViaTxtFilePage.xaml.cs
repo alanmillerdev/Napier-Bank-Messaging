@@ -21,7 +21,7 @@ namespace NapierBankMessaging.Views
 {
     public partial class InputDataViaTxtFilePage : Page
     {
-        private Controller ControllerInstance = new Controller();
+        private Controller ControllerInstance;
 
         private List<Message> MessageList = new List<Message>();
 
@@ -29,10 +29,11 @@ namespace NapierBankMessaging.Views
 
         private int maxMessageIndex = 0;
 
-        public InputDataViaTxtFilePage()
+        public InputDataViaTxtFilePage(Controller controllerInstance)
         {
             InitializeComponent();
 
+            ControllerInstance = controllerInstance;
         }
 
         private void MainMenuBtn_Click(object sender, RoutedEventArgs e)
