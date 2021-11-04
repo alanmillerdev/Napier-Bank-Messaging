@@ -13,9 +13,20 @@
 
         <!--Header Labels-->
         <Label Content="Significant Incidents" VerticalAlignment="Top" FontSize="24" Margin="490,10,489,0"/>
+        <ListView x:Name="SIRList" Height="455" VerticalAlignment="Top" Margin="44,114,44,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Message ID" DisplayMemberBinding="{Binding messageID}"/>
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn Header="Incident" DisplayMemberBinding="{Binding Incident}"/>
+                    <GridViewColumn Header="Sort Code" DisplayMemberBinding="{Binding sortCode}"/>
+                    <GridViewColumn Header="Email Origin" DisplayMemberBinding="{Binding eAddress}"/>
+                    <GridViewColumn Header="Email Body" DisplayMemberBinding="{Binding messageBody}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
         <!--Datagrid-->
-        <DataGrid HorizontalAlignment="Left" Height="533" VerticalAlignment="Top" Width="1180" Margin="10,57,0,0" IsEnabled="False"/>
 
     </Grid>
 </Page>

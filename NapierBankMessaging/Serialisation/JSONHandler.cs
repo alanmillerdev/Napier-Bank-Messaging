@@ -10,7 +10,7 @@ namespace NapierBankMessaging.Serialisation
     public class JSONHandler
     {
 
-        string applicationDataStorageLocation = @"C:\Users\alanm\Desktop\NapierBankMessaging\ApplicationData.JSON";
+        string applicationDataStorageLocation = @"..\Data\ApplicationData.JSON";
 
         public List<Message> ReadApplicationData()
         {
@@ -30,7 +30,7 @@ namespace NapierBankMessaging.Serialisation
 
             string jsonData = string.Empty;
 
-            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto, Formatting = Formatting.Indented };
 
             jsonData = JsonConvert.SerializeObject(MessageList, settings);
 

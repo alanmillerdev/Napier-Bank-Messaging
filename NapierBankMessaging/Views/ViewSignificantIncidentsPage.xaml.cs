@@ -1,4 +1,5 @@
-﻿using NapierBankMessaging.SystemController;
+﻿using NapierBankMessaging.MessageTypes;
+using NapierBankMessaging.SystemController;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,11 +31,23 @@ namespace NapierBankMessaging.Views
 
             ControllerInstance = controllerInstance;
 
+            PopulateListView();
+
         }
 
         private void MainMenuBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new MainMenuPage());
+            this.NavigationService.Navigate(new MainMenuPage(ControllerInstance));
+        }
+
+        private void PopulateListView()
+        {
+            List<SIR> sirList = ControllerInstance.getSIRList();
+
+            for (int i = 0; i < sirList.Count; i++)
+            {
+                SIRList.Items.Add(sirList[i]);
+            }
         }
     }
 }

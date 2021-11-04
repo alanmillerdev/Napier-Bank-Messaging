@@ -29,11 +29,24 @@ namespace NapierBankMessaging.Views
             InitializeComponent();
 
             ControllerInstance = controllerInstance;
+
+            PopulateTrendsList();
         }
 
         private void MainMenuBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new MainMenuPage());
+            this.NavigationService.Navigate(new MainMenuPage(ControllerInstance));
+        }
+
+        public void PopulateTrendsList()
+        {
+
+            Dictionary<string, int> trendList = ControllerInstance.GetTrends();
+
+            foreach (KeyValuePair<string, int> entry in trendList)
+            {
+                TweetTrendsList.Items.Add(entry);
+            }
         }
     }
 }

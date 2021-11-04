@@ -11,11 +11,13 @@ namespace NapierBankMessaging.Views
     public partial class MainMenuPage : Page
     {
 
-        private Controller ControllerInstance = new Controller();
+        private Controller ControllerInstance;
 
-        public MainMenuPage()
+        public MainMenuPage(Controller controllerInstance)
         {
             InitializeComponent();
+
+            ControllerInstance = controllerInstance;
         }
 
         private void InputDataNavigationBtn_Click(object sender, RoutedEventArgs e)

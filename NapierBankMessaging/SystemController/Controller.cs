@@ -4,9 +4,9 @@ using NapierBankMessaging.MessageTypes;
 using NapierBankMessaging.Serialisation;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+using Message = NapierBankMessaging.MessageTypes.Message;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace NapierBankMessaging.SystemController
 {
@@ -30,6 +30,11 @@ namespace NapierBankMessaging.SystemController
 
         }
 
+        public void saveApplicationData()
+        {
+            jsonHandler.JSONOutput(MessageList);
+        }
+
         public List<Message> TxtFileUploadMessageParser()
         {
 
@@ -49,6 +54,11 @@ namespace NapierBankMessaging.SystemController
                 returnedMessages = ParserInstance.TXTParser(returnedTxt);
             }
 
+            foreach (Message msg in returnedMessages)
+            {
+                MessageList.Add(msg);
+            }
+
             //jsonHandler.JSONOutput(returnedMessages);
 
             return returnedMessages;
@@ -61,10 +71,104 @@ namespace NapierBankMessaging.SystemController
                 List<Message> messageReturn = new List<Message>();
                 var ParserInstance = new TxtParser();
                 messageReturn = ParserInstance.TXTParser(data);
+                MessageList.Add(messageReturn[0]);
 
             return messageReturn;
         }
 
-        
+        public List<Tuple<string, string>> GetQuarantineList()
+        {
+
+            List<Email> emailList = new List<Email>();
+
+            List<SIR> sirList = new List<SIR>();
+
+            foreach (Message msg in MessageList)
+            {
+                if(msg.GetType() == typeof(Email))
+                {
+                    emailList.Add((Email)msg);
+                }
+
+                if (msg.GetType() == typeof(SIR))
+                {
+                    sirList.Add((SIR)msg);
+                }
+
+            }
+
+            List<Tuple<string, string>> urlList = new List<Tuple<string, string>>();
+
+            foreach(Email email in emailList)
+            {
+                foreach(string url in email.qURLS)
+                {
+                    urlList.Add(new Tuple<string, string>(email.messageID, url));
+                }
+            }
+
+            foreach (SIR sir in sirList)
+            {
+                foreach (string url in sir.qURLS)
+                {
+                    urlList.Add(new Tuple<string, string>(sir.messageID, url));
+                }
+            }
+
+            return urlList;
+
+        }
+
+        public List<SIR> getSIRList()
+        {
+
+            List<SIR> sirList = new List<SIR>();
+
+            foreach (Message msg in MessageList)
+            {
+
+                if (msg.GetType() == typeof(SIR))
+                {
+                    sirList.Add((SIR)msg);
+                }
+
+            }
+
+            return sirList;
+        }
+
+        public Dictionary<string, int> GetTrends()
+        {
+            List<Tweet> tweetList = new List<Tweet>();
+
+            Dictionary<string, int> trendList = new Dictionary<string, int>();
+
+            foreach (Message msg in MessageList)
+            {
+
+                if(msg.GetType() == typeof(Tweet))
+                {
+
+                    tweetList.Add((Tweet)msg);
+
+                }
+            }
+
+            foreach(Tweet tweet in tweetList)
+            {
+                foreach(string hashtag in tweet.hashtags)
+                {
+                    if(trendList.ContainsKey(hashtag))
+                    {
+                        trendList[hashtag] = trendList[hashtag] + 1;
+                    }
+                    else
+                    {
+                        trendList.Add(hashtag, 1);
+                    }
+                }
+            }
+            return trendList;
+        }
     }
 }

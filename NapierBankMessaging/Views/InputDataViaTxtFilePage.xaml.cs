@@ -38,7 +38,7 @@ namespace NapierBankMessaging.Views
 
         private void MainMenuBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new MainMenuPage());
+            this.NavigationService.Navigate(new MainMenuPage(ControllerInstance));
         }
 
         private void TxtFileInput_Click(object sender, RoutedEventArgs e)
