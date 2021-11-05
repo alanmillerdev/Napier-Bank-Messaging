@@ -13,11 +13,28 @@ namespace NapierBankMessaging.Views
 
         private Controller ControllerInstance;
 
+        private string TimeOfDay;
+
         public MainMenuPage(Controller controllerInstance)
         {
             InitializeComponent();
 
             ControllerInstance = controllerInstance;
+
+            if (DateTime.Now.Hour <= 12)
+            {
+                TimeOfDay = "Good Morning, what would you like to do today?";
+            }   
+            else if (DateTime.Now.Hour <= 16)
+            {
+                TimeOfDay = "Good Afternoon, what would you like to do today?";
+            }
+            else if (DateTime.Now.Hour <= 24)
+            {
+                TimeOfDay = "Good Evening, what would you like to do today?";
+            }
+
+            Header.Content = TimeOfDay;
         }
 
         private void InputDataNavigationBtn_Click(object sender, RoutedEventArgs e)

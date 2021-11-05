@@ -88,7 +88,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="SystemController\Controller.cs" />
     <Compile Include="InputParser\TxtParser.cs" />
     <Compile Include="MessageTypes\Email.cs" />
@@ -99,8 +98,6 @@
     <Compile Include="Serialisation\CSVHandler.cs" />
     <Compile Include="Serialisation\JSONHandler.cs" />
     <Compile Include="Serialisation\TXTHandler.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\InputDataPage.xaml.cs">
       <DependentUpon>InputDataPage.xaml</DependentUpon>
     </Compile>
@@ -183,10 +180,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Database\" />
-    <Folder Include="Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

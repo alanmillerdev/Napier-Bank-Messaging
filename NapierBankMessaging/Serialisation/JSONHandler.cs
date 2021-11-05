@@ -10,7 +10,7 @@ namespace NapierBankMessaging.Serialisation
     public class JSONHandler
     {
 
-        string applicationDataStorageLocation = @"..\Data\ApplicationData.JSON";
+        string applicationDataStorageLocation = @"H:\Software Engineering Cousework\DataNapierBank\ApplicationData.JSON";
 
         public List<Message> ReadApplicationData()
         {

@@ -32,6 +32,13 @@ namespace NapierBankMessaging.Views
             InitializeComponent();
 
             ControllerInstance = controllerInstance;
+
+            InstructionBox.Text = "The message header is to contain the source of the message, for example: \n Tweet: @alan.miller \n SMS: +447797143800 \n Email / SIR: alan @miller.com \n" +
+                "Message Body is to contain any other information, for example:\n " +
+                "Tweet: Message Body: Good Morning #Twitter you all are all AAS this morning.\n" +
+                "SMS: Message Body: lol you should have been there! \n" +
+                "Email: Subject: IMPORTANT Message Body: Hey, I hope you have a good day, check out this link: http://scam.com\n" +
+                "SIR: Subject: SIR Date:01/01/2000 Sort Code: 99-99-99 Incident Type: Theft Message Body: Hello, I would like to report a theft of my property.";
         }
 
         private void MainMenuBtn_Click(object sender, RoutedEventArgs e)

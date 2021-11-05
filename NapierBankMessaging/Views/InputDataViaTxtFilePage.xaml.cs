@@ -1,5 +1,4 @@
-﻿using NapierBankMessaging.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +33,10 @@ namespace NapierBankMessaging.Views
             InitializeComponent();
 
             ControllerInstance = controllerInstance;
+
+            InstructionBox.Text = "To start, upload a txt file. \n" +
+                "WARNING: This file must follow the same formatting as the manual input page. " +
+                "Each line of the file will be output as one message.";
         }
 
         private void MainMenuBtn_Click(object sender, RoutedEventArgs e)

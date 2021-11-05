@@ -13,10 +13,10 @@
 
         <!--Header Labels-->
         <Label Content="Tweet Trends" VerticalAlignment="Top" FontSize="24" Margin="526,10,526,0"/>
-        <ListView x:Name="TweetTrendsList" HorizontalAlignment="Left" Height="503" VerticalAlignment="Top" Width="440" Margin="386,57,0,0">
+        <ListView x:Name="TweetTrendsList" Height="503" VerticalAlignment="Top" Margin="375,57,377,0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Hashtag" DisplayMemberBinding="{Binding Key}"/>
+                    <GridViewColumn Header="Hashtag" Width="400" DisplayMemberBinding="{Binding Key}"/>
                     <GridViewColumn Header="Count" DisplayMemberBinding="{Binding Value}"/>
                 </GridView>
             </ListView.View>

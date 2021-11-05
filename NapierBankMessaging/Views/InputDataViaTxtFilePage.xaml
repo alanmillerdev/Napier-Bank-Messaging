@@ -18,7 +18,7 @@
         <Label Content="Instructions" VerticalAlignment="Top" FontSize="24" Margin="130,68,934,0"/>
         
         <!--Instructions-->
-        <TextBox HorizontalAlignment="Left" Height="341" Margin="27,110,0,0" TextWrapping="Wrap" Text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. " VerticalAlignment="Top" Width="345" FontSize="24" IsEnabled="False"/>
+        <TextBox x:Name="InstructionBox" HorizontalAlignment="Left" Height="341" Margin="27,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="345" FontSize="24" IsEnabled="False"/>
 
         <!--Message Header Output-->
         <Label Content="Message ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="443,110,0,0"/>

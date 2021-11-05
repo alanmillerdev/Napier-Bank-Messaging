@@ -13,7 +13,9 @@
 
         <!--Header Labels-->
         <Label Content="Significant Incidents" VerticalAlignment="Top" FontSize="24" Margin="490,10,489,0"/>
-        <ListView x:Name="SIRList" Height="455" VerticalAlignment="Top" Margin="44,114,44,0">
+
+        <!--ListView-->
+        <ListView x:Name="SIRList" Height="465" VerticalAlignment="Top" Margin="44,83,44,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Message ID" DisplayMemberBinding="{Binding messageID}"/>
@@ -25,8 +27,5 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
-        <!--Datagrid-->
-
     </Grid>
 </Page>

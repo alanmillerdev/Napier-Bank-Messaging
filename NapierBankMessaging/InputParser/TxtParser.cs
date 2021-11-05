@@ -9,13 +9,6 @@ using NapierBankMessaging.Serialisation;
 namespace NapierBankMessaging.InputParser
 {
 
-    //TODO: Convert Parser to return one parsed message at a time
-    //Output object to JSON file at the same time for storage.
-    //Display parsed result via UI.
-    //This approach will allow for conversion of message with ease for manual input and file based input
-    //Once this is complete implement unit tests for serialisation and parsing
-    //Finally merge branches then start working on the UI.
-
     public class TxtParser
     {
 
@@ -50,7 +43,7 @@ namespace NapierBankMessaging.InputParser
                     } catch (FormatException)
                     {
                         //Invalid Data Error
-                        MessageBox.Show("It doesn't work");
+                        MessageBox.Show("Invalid Data Entered, Skipping Entry starting with: " + line.Split()[0]);
                     }
                 }
             }
@@ -85,7 +78,7 @@ namespace NapierBankMessaging.InputParser
             string[] splitMsgBody = msgBody.Split();
 
             //Needs better implementation
-            string csvFilePath = @"..\Data\textwords.csv";
+            string csvFilePath = @"H:\Software Engineering Cousework\DataNapierBank\textwords.csv";
 
             IDictionary<string, string> abbreviationList = CSVHandler.AbbreviationInput(csvFilePath);
 
@@ -349,7 +342,7 @@ namespace NapierBankMessaging.InputParser
                 if (messageBody.Length > 140)
                 {
 
-                    MessageBox.Show("Tweet body exceeds supported bounds.");
+                    MessageBox.Show("The inputted message exceeds Twitters message bounds, are you sure you have entered it correctly?");
                     break;
                 }
 
@@ -363,7 +356,7 @@ namespace NapierBankMessaging.InputParser
 
                 if(username.Length > 16)
                 {
-                    MessageBox.Show("Twitter Username exceeds supported bounds.");
+                    MessageBox.Show("The inputted username is outwidth Twitters username bounds, are you sure you have entered it correctly?");
                     break;
                 }
 
