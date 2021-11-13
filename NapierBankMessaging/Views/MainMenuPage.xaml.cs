@@ -57,6 +57,11 @@ namespace NapierBankMessaging.Views
             this.NavigationService.Navigate(new ViewTweetTrendsPage(ControllerInstance));
         }
 
+        private void ViewTweetMentionsNavigationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new ViewTweetMentionsPage(ControllerInstance));
+        }
+
         private void ViewQuarantineNavigationBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new ViewQuarantineListPage(ControllerInstance));
