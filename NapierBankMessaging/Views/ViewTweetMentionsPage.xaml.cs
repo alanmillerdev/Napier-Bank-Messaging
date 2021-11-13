@@ -17,20 +17,21 @@ using System.Windows.Shapes;
 namespace NapierBankMessaging.Views
 {
     /// <summary>
-    /// Interaction logic for ViewTweetTrendsPage.xaml
+    /// Interaction logic for ViewTweetMentionsPage.xaml
     /// </summary>
-    public partial class ViewTweetTrendsPage : Page
+    public partial class ViewTweetMentionsPage : Page
     {
 
         Controller ControllerInstance;
 
-        public ViewTweetTrendsPage(Controller controllerInstance)
+        public ViewTweetMentionsPage(Controller controllerInstance)
         {
             InitializeComponent();
 
             ControllerInstance = controllerInstance;
 
-            PopulateTrendsList();
+            PopulateMentionsList();
+
         }
 
         private void MainMenuBtn_Click(object sender, RoutedEventArgs e)
@@ -38,14 +39,14 @@ namespace NapierBankMessaging.Views
             this.NavigationService.Navigate(new MainMenuPage(ControllerInstance));
         }
 
-        public void PopulateTrendsList()
+        public void PopulateMentionsList()
         {
 
-            Dictionary<string, int> trendList = ControllerInstance.GetTrends();
+            Dictionary<string, int> trendList = ControllerInstance.GetMentions();
 
             foreach (KeyValuePair<string, int> entry in trendList)
             {
-                TweetTrendsList.Items.Add(entry);
+                TweetMentionsList.Items.Add(entry);
             }
         }
     }

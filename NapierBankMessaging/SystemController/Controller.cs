@@ -170,5 +170,39 @@ namespace NapierBankMessaging.SystemController
             }
             return trendList;
         }
+
+        public Dictionary<string, int> GetMentions()
+        {
+            List<Tweet> tweetList = new List<Tweet>();
+
+            Dictionary<string, int> mentionsList = new Dictionary<string, int>();
+
+            foreach (Message msg in MessageList)
+            {
+
+                if (msg.GetType() == typeof(Tweet))
+                {
+
+                    tweetList.Add((Tweet)msg);
+
+                }
+            }
+
+            foreach (Tweet tweet in tweetList)
+            {
+                foreach (string mention in tweet.mentions)
+                {
+                    if (mentionsList.ContainsKey(mention))
+                    {
+                        mentionsList[mention] = mentionsList[mention] + 1;
+                    }
+                    else
+                    {
+                        mentionsList.Add(mention, 1);
+                    }
+                }
+            }
+            return mentionsList;
+        }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System;
 using System.IO;
-using System.Text.Json;
 using Newtonsoft.Json;
 
 namespace NapierBankMessaging.Serialisation
@@ -10,16 +9,25 @@ namespace NapierBankMessaging.Serialisation
     public class JSONHandler
     {
 
-        string applicationDataStorageLocation = @"H:\Software Engineering Cousework\DataNapierBank\ApplicationData.JSON";
+        string applicationDataStorageLocation = "ApplicationData.JSON";
 
         public List<Message> ReadApplicationData()
         {
 
-            string jsonData = File.ReadAllText(applicationDataStorageLocation);
+            List<Message> MessageList = new List<Message>();
 
-            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
+            try
+            {
+                string jsonData = File.ReadAllText(applicationDataStorageLocation);
 
-            List<Message> MessageList = JsonConvert.DeserializeObject<List<Message>>(jsonData, settings);
+                JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
+
+                MessageList = JsonConvert.DeserializeObject<List<Message>>(jsonData, settings);
+
+            } catch (Exception e)
+            {
+
+            }
 
             return MessageList;
 

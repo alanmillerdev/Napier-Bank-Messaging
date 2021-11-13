@@ -14,6 +14,7 @@
         <Button x:Name="InputDataViaTxtFileNavigationBtn" Content="Input Data Via Txt File" HorizontalAlignment="Left" VerticalAlignment="Top" Width="279" Margin="461,214,0,0" FontSize="24" Click="InputDataViaTxtFileNavigationBtn_Click"/>
         <Button x:Name="ViewSignificantIncidentsNavigationBtn" Content="View Significant Incidents" HorizontalAlignment="Left" VerticalAlignment="Top" Width="279" Margin="461,270,0,0" FontSize="24" Click="ViewSignificantIncidentsNavigationBtn_Click"/>
         <Button x:Name="ViewTweetTrendsNavigationBtn" Content="View Tweet Trends" HorizontalAlignment="Left" VerticalAlignment="Top" Width="279" Margin="461,323,0,0" FontSize="24" Click="ViewTweetTrendsNavigationBtn_Click"/>
-        <Button x:Name="ViewQuarantineNavigationBtn" Content="View Quarantine List" HorizontalAlignment="Left" VerticalAlignment="Top" Width="279" Margin="461,377,0,0" FontSize="24" Click="ViewQuarantineNavigationBtn_Click"/>
+        <Button x:Name="ViewTweetMentionsNavigationBtn" Content="View Tweet Mentions" HorizontalAlignment="Left" VerticalAlignment="Top" Width="279" Margin="461,376,0,0" FontSize="24" Click="ViewTweetMentionsNavigationBtn_Click"/>
+        <Button x:Name="ViewQuarantineNavigationBtn" Content="View Quarantine List" HorizontalAlignment="Left" VerticalAlignment="Top" Width="279" Margin="461,428,0,0" FontSize="24" Click="ViewQuarantineNavigationBtn_Click"/>
     </Grid>
 </Page>
