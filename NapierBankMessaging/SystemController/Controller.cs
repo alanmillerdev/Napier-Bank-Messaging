@@ -18,7 +18,7 @@ namespace NapierBankMessaging.SystemController
 
         public Controller()
         {
-            MessageList = jsonHandler.ReadApplicationData();
+            MessageList = loadApplicationData();
         }
 
         public List<Message> loadApplicationData()

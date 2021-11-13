@@ -18,8 +18,6 @@ namespace NapierBankMessaging
         {
             InitializeComponent();
 
-            //this.DataContext = new MainWindowViewModel();
-
             Loaded += MainWindow_Loaded;
 
             this.Closing += MainWindow_Closing;
