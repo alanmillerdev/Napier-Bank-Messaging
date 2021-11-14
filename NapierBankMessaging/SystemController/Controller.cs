@@ -67,11 +67,18 @@ namespace NapierBankMessaging.SystemController
         public List<Message> ManualInputMessageParser(string msgHeader, string msgBody)
         {
 
+            List<Message> messageReturn = new List<Message>();
+
+            try
+            {
                 string[] data = { msgHeader + " " + msgBody };
-                List<Message> messageReturn = new List<Message>();
                 var ParserInstance = new TxtParser();
                 messageReturn = ParserInstance.TXTParser(data);
                 MessageList.Add(messageReturn[0]);
+            } catch (ArgumentOutOfRangeException e)
+            {
+               
+            }
 
             return messageReturn;
         }
@@ -85,7 +92,7 @@ namespace NapierBankMessaging.SystemController
 
             foreach (Message msg in MessageList)
             {
-                if(msg.GetType() == typeof(Email))
+                if (msg.GetType() == typeof(Email))
                 {
                     emailList.Add((Email)msg);
                 }
@@ -99,9 +106,9 @@ namespace NapierBankMessaging.SystemController
 
             List<Tuple<string, string>> urlList = new List<Tuple<string, string>>();
 
-            foreach(Email email in emailList)
+            foreach (Email email in emailList)
             {
-                foreach(string url in email.qURLS)
+                foreach (string url in email.qURLS)
                 {
                     urlList.Add(new Tuple<string, string>(email.messageID, url));
                 }
@@ -146,7 +153,7 @@ namespace NapierBankMessaging.SystemController
             foreach (Message msg in MessageList)
             {
 
-                if(msg.GetType() == typeof(Tweet))
+                if (msg.GetType() == typeof(Tweet))
                 {
 
                     tweetList.Add((Tweet)msg);
@@ -154,11 +161,11 @@ namespace NapierBankMessaging.SystemController
                 }
             }
 
-            foreach(Tweet tweet in tweetList)
+            foreach (Tweet tweet in tweetList)
             {
-                foreach(string hashtag in tweet.hashtags)
+                foreach (string hashtag in tweet.hashtags)
                 {
-                    if(trendList.ContainsKey(hashtag))
+                    if (trendList.ContainsKey(hashtag))
                     {
                         trendList[hashtag] = trendList[hashtag] + 1;
                     }

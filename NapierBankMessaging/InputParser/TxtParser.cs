@@ -43,7 +43,7 @@ namespace NapierBankMessaging.InputParser
                     } catch (FormatException)
                     {
                         //Invalid Data Error
-                        MessageBox.Show("Invalid Data Entered, Skipping Entry starting with: " + line.Split()[0]);
+                        MessageBox.Show("Invalid Data Entry Starting with: " + line.Split()[0] + ". Please try again.");
                     }
                 }
             }
@@ -70,7 +70,7 @@ namespace NapierBankMessaging.InputParser
 
         }
 
-        private string AbbreviationCheck(string msgBody)
+        public string AbbreviationCheck(string msgBody)
         {
 
             var CSVHandlerInstance = new CSVHandler();
@@ -97,7 +97,7 @@ namespace NapierBankMessaging.InputParser
             return msgBody = string.Join(" ", splitMsgBody);
         }
 
-        private void EmailParser(string preParseLine)
+        public void EmailParser(string preParseLine)
         {
 
             string messageID;
@@ -117,76 +117,90 @@ namespace NapierBankMessaging.InputParser
             do
             {
 
-                //Email Subject
-                emailSubject = splitLine[1];
-
-                if(emailSubject.Length > 20)
+                try
                 {
+                    //Email Subject
+                    emailSubject = splitLine[1];
 
-                    MessageBox.Show("Email subject exceeds supported bounds.");
-                    break;
-
-                }
-
-                if(emailSubject == "SIR")
-                {
-
-                    SIRParser(preParseLine);
-
-                } else
-                {
-
-                    //MessageID
-
-                    messageID = MessageIDBuilder("E");
-
-                    //Email Address
-                    emailAddress = splitLine[0];
-
-                    //MessageBody
-
-                    List<string> tempList = new List<string>();
-                    for (int i = 2; i < splitLine.Length; i++)
-                    {
-                        tempList.Add(splitLine[i]);
-                    }
-
-                    messageBody = string.Join(" ", tempList.ToArray());
-
-                    //Message Body Length Check
-                    if (messageBody.Length > 1028)
+                    if (emailSubject.Length > 20)
                     {
 
-                        MessageBox.Show("Email body exceeds supported bounds.");
+                        MessageBox.Show("Email subject exceeds supported bounds.");
                         break;
+
                     }
 
-                    //URL Check
-
-                    string[] splitMessageBody = messageBody.Split();
-
-                    foreach (string val in splitMessageBody)
+                    if (emailSubject == "SIR")
                     {
-                        if (val.StartsWith("http://") || val.StartsWith("https://"))
+
+                        SIRParser(preParseLine);
+
+                    }
+                    else
+                    {
+
+                        //MessageID
+
+                        messageID = MessageIDBuilder("E");
+
+                        //Email Address
+                        emailAddress = splitLine[0];
+
+                        //MessageBody
+
+                        List<string> tempList = new List<string>();
+                        for (int i = 2; i < splitLine.Length; i++)
+                        {
+                            tempList.Add(splitLine[i]);
+                        }
+
+                        messageBody = string.Join(" ", tempList.ToArray());
+
+                        //Message Body Length Check
+                        if (messageBody.Length > 1028)
                         {
 
-                            tempURLList.Add(val);
-
-                            string replacementValue = "<URL Quarantined>";
-
-                            checkedMessageBody = splitMessageBody.Select(s => s.Replace(val, replacementValue)).ToArray();
-
+                            MessageBox.Show("Email body exceeds supported bounds.");
+                            break;
                         }
+
+                        //URL Check
+
+                        string[] splitMessageBody = messageBody.Split();
+
+                        foreach (string val in splitMessageBody)
+                        {
+                            if (val.StartsWith("http://") || val.StartsWith("https://"))
+                            {
+
+                                tempURLList.Add(val);
+
+                                string replacementValue = "<URL Quarantined>";
+
+                                checkedMessageBody = splitMessageBody.Select(s => s.Replace(val, replacementValue)).ToArray();
+
+                            }
+                        }
+
+                        if (messageBody == string.Empty)
+                        {
+                            MessageBox.Show("Invalid Message Body, Try Again.");
+                            break;
+                        }
+
+                        messageBody = string.Join(" ", checkedMessageBody);
+
+                        //Quarantined URLs
+                        quarantinedURLs = tempURLList.ToArray();
+
+                        EmailParsed = new Email(emailAddress, emailSubject, quarantinedURLs, messageID, messageBody);
+
+                        ParsedMessages.Add(EmailParsed);
                     }
-
-                    messageBody = string.Join(" ", checkedMessageBody);
-
-                    //Quarantined URLs
-                    quarantinedURLs = tempURLList.ToArray();
-
-                    EmailParsed = new Email(emailAddress, emailSubject, quarantinedURLs, messageID, messageBody);
-
-                    ParsedMessages.Add(EmailParsed);
+                } catch (Exception err)
+                {
+                    MessageBox.Show("Invalid Message Body, Please Try Again.");
+                    break;
                 }
             }
             while (EmailParsed == null);
@@ -195,14 +209,14 @@ namespace NapierBankMessaging.InputParser
         private void SIRParser(string preParseLine)
         {
 
-            string messageID;
-            string messageBody;
-            string[] urls;
-            string emailAddress;
-            string emailSubject;
-            DateTime date;
-            string sortCode;
-            string incident;
+            string messageID = string.Empty;
+            string messageBody = string.Empty;
+            string[] urls = null;
+            string emailAddress = string.Empty;
+            string emailSubject = string.Empty;
+            DateTime date = DateTime.MinValue;
+            string sortCode = string.Empty;
+            string incident = string.Empty;
 
             SIR SIRParsed = new SIR();
 
@@ -222,55 +236,68 @@ namespace NapierBankMessaging.InputParser
                 //Email Address
                 emailAddress = splitLine[0];
 
-                //Subject
-                emailSubject = splitLine[1];
-
-                //Date
-                date = DateTime.Parse(splitLine[2]);
-
-                //SortCode
-                sortCode = splitLine[3];
-
-                //Incident
-                incident = splitLine[4];
-
-                //MessageBody
-                List<string> tempList = new List<string>();
-                for (int i = 5; i < splitLine.Length; i++)
+                try
                 {
-                    tempList.Add(splitLine[i]);
-                }
 
-                messageBody = string.Join(" ", tempList.ToArray());
+                    //Subject
+                    emailSubject = splitLine[1];
 
-                //URL Check
+                    //Date
+                    date = DateTime.Parse(splitLine[2]);
 
-                string[] splitMessageBody = messageBody.Split();
+                    //SortCode
+                    sortCode = splitLine[3];
 
-                foreach (string val in splitMessageBody)
-                {
-                    if (val.StartsWith("http://") || val.StartsWith("https://"))
+                    //Incident
+                    incident = splitLine[4];
+
+                    //MessageBody
+                    List<string> tempList = new List<string>();
+                    for (int i = 5; i < splitLine.Length; i++)
                     {
-
-                        tempURLList.Add(val);
-
-                        string replacementValue = "<URL Quarantined>";
-
-                        checkedMessageBody = splitMessageBody.Select(s => s.Replace(val, replacementValue)).ToArray();
-
+                        tempList.Add(splitLine[i]);
                     }
+
+                    messageBody = string.Join(" ", tempList.ToArray());
+
+                    //URL Check
+
+                    string[] splitMessageBody = messageBody.Split();
+
+                    foreach (string val in splitMessageBody)
+                    {
+                        if (val.StartsWith("http://") || val.StartsWith("https://"))
+                        {
+
+                            tempURLList.Add(val);
+
+                            string replacementValue = "<URL Quarantined>";
+
+                            checkedMessageBody = splitMessageBody.Select(s => s.Replace(val, replacementValue)).ToArray();
+
+                        }
+                    }
+
+                    if (checkedMessageBody != null)
+                    {
+                        messageBody = string.Join(" ", checkedMessageBody);
+                    }
+
+                    //Quarantined URLs
+                    urls = tempURLList.ToArray();
+
+                    SIRParsed = new SIR(date, sortCode, incident, emailAddress, emailSubject, urls, messageID, messageBody);
+
+                    ParsedMessages.Add(SIRParsed);
+
+                } catch (Exception err)
+                {
+                    MessageBox.Show("Invalid Message Body, Please Try Again.");
+                    break;
                 }
-
-                messageBody = string.Join(" ", checkedMessageBody);
-
-                //Quarantined URLs
-                urls = tempURLList.ToArray();
 
             } while (SIRParsed == null);
 
-            SIRParsed = new SIR(date, sortCode, incident, emailAddress, emailSubject, urls, messageID, messageBody);
-
-            ParsedMessages.Add(SIRParsed);
         }
 
         private void SMSParser(string preParseLine)
@@ -294,27 +321,35 @@ namespace NapierBankMessaging.InputParser
                 //Sender
                 sender = splitLine[0];
 
-                //MessageBody
-
-                List<string> tempList = new List<string>();
-                for (int i = 1; i < splitLine.Length; i++)
+                try
                 {
-                    tempList.Add(splitLine[i]);
+
+                    //MessageBody
+
+                    List<string> tempList = new List<string>();
+                    for (int i = 1; i < splitLine.Length; i++)
+                    {
+                        tempList.Add(splitLine[i]);
+                    }
+
+                    messageBody = string.Join(" ", tempList.ToArray());
+
+                    //Message Body Text Speak Conversion
+                    string checkResult = AbbreviationCheck(messageBody);
+
+                    messageBody = checkResult;
+
+                    SMSParsed = new SMS(sender, messageID, messageBody);
+
+                    ParsedMessages.Add(SMSParsed);
+
+                } catch (Exception err)
+                {
+                    MessageBox.Show("Invalid Message Body, Please Try Again.");
+                    break;
                 }
-
-                messageBody = string.Join(" ", tempList.ToArray());
-
-                //Message Body Text Speak Conversion
-                string checkResult = AbbreviationCheck(messageBody);
-
-                messageBody = checkResult;
-
             }
             while (SMSParsed == null);
-
-            SMSParsed = new SMS(sender, messageID, messageBody);
-
-            ParsedMessages.Add(SMSParsed);
         }
 
         private void TweetParser(string preParseLine)
@@ -336,70 +371,77 @@ namespace NapierBankMessaging.InputParser
 
                 messageID = MessageIDBuilder("T");
 
-                //MessageBody
-
-                List<string> tempList = new List<string>();
-                for (int i = 1; i < splitLine.Length; i++)
-                {
-                    tempList.Add(splitLine[i]);
-                }
-
-                messageBody = string.Join(" ", tempList.ToArray());
-
-                //Message Body Length Check
-                if (messageBody.Length > 140)
-                {
-
-                    MessageBox.Show("The inputted message exceeds Twitters message bounds, are you sure you have entered it correctly?");
-                    break;
-                }
-
-                //Message Body Text Speak Conversion
-                string checkResult = AbbreviationCheck(messageBody);
-
-                messageBody = checkResult;
-
                 //Username
                 username = splitLine[0];
 
-                if(username.Length > 16)
+                if (username.Length > 16)
                 {
                     MessageBox.Show("The inputted username is outwidth Twitters username bounds, are you sure you have entered it correctly?");
                     break;
                 }
 
-                //Mentions
-
-                List<String> tempMentionsList = new List<string>();
-                foreach (string val in messageBody.Split())
+                try
                 {
+                    //MessageBody
 
-                    if (val.StartsWith("@"))
+                    List<string> tempList = new List<string>();
+                    for (int i = 1; i < splitLine.Length; i++)
                     {
-                        tempMentionsList.Add(val);
+                        tempList.Add(splitLine[i]);
                     }
+
+                    messageBody = string.Join(" ", tempList.ToArray());
+
+                    //Message Body Length Check
+                    if (messageBody.Length > 140)
+                    {
+
+                        MessageBox.Show("The inputted message exceeds Twitters message bounds, are you sure you have entered it correctly?");
+                        break;
+                    }
+
+                    //Message Body Text Speak Conversion
+                    string checkResult = AbbreviationCheck(messageBody);
+
+                    messageBody = checkResult;
+
+                    //Mentions
+
+                    List<String> tempMentionsList = new List<string>();
+                    foreach (string val in messageBody.Split())
+                    {
+
+                        if (val.StartsWith("@"))
+                        {
+                            tempMentionsList.Add(val);
+                        }
+                    }
+
+                    mentions = tempMentionsList.ToArray();
+
+                    //Hashtags
+
+                    List<String> tempHashtagList = new List<string>();
+                    foreach (string val in messageBody.Split())
+                    {
+
+                        if (val.StartsWith("#"))
+                        {
+                            tempHashtagList.Add(val);
+                        }
+                    }
+
+                    hashtags = tempHashtagList.ToArray();
+
+                    TweetParsed = new Tweet(username, hashtags, mentions, messageID, messageBody);
+
+                    ParsedMessages.Add(TweetParsed);
                 }
-
-                mentions = tempMentionsList.ToArray();
-
-                //Hashtags
-
-                List<String> tempHashtagList = new List<string>();
-                foreach (string val in messageBody.Split())
+                catch (Exception err)
                 {
-
-                    if (val.StartsWith("#"))
-                    {
-                        tempHashtagList.Add(val);
-                    }
+                    MessageBox.Show("Invalid Message Body, Please Try Again.");
+                    break;
                 }
-
-                hashtags = tempHashtagList.ToArray();
-
-                TweetParsed = new Tweet(username, hashtags, mentions, messageID, messageBody);
-
-                ParsedMessages.Add(TweetParsed);
-
             }
             while (TweetParsed == null);
         }

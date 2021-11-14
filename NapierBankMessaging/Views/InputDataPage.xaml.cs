@@ -55,8 +55,15 @@ namespace NapierBankMessaging.Views
             else
             {
                 MessageList = ControllerInstance.ManualInputMessageParser(MessageHeaderInput.Text, MessageBodyInput.Text);
-                MessageIDOutput.Text = MessageList[0].messageID;
-                MessageBodyOutput.Text = MessageList[0].messageBody;
+
+                try
+                {
+                    MessageIDOutput.Text = MessageList[0].messageID;
+                    MessageBodyOutput.Text = MessageList[0].messageBody;
+                } catch (ArgumentOutOfRangeException err)
+                {
+
+                }
             }
         }
     }
