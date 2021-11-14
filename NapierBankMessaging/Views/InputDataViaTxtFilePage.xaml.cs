@@ -46,17 +46,25 @@ namespace NapierBankMessaging.Views
 
         private void TxtFileInput_Click(object sender, RoutedEventArgs e)
         {
+
             MessageList = ControllerInstance.TxtFileUploadMessageParser();
-            
-            //Initial Output
-            MessageIDOutput.Text = MessageList[0].messageID;
-            MessageBodyOutput.Text = MessageList[0].messageBody;
 
-            //Information Output
-            NumberOfMsgParsedLbl.Content = "Number of Messages Parsed: " + MessageList.Count;
+            if (MessageList.Count == 0)
+            {
 
-            //Max Message Count Update
-            maxMessageIndex = MessageList.Count;
+            }
+            else
+            {
+                //Initial Output
+                MessageIDOutput.Text = MessageList[0].messageID;
+                MessageBodyOutput.Text = MessageList[0].messageBody;
+
+                //Information Output
+                NumberOfMsgParsedLbl.Content = "Number of Messages Parsed: " + MessageList.Count;
+
+                //Max Message Count Update
+                maxMessageIndex = MessageList.Count;
+            }
         }
 
         private void NextMessageBtn_Click(object sender, RoutedEventArgs e)
