@@ -9,7 +9,7 @@ namespace Parse.Tests
     [TestClass]
     public class ParseTests
     {
-
+        //Global Text Parser Instance that is used in all tests.
         TxtParser TxtParserInstance = new TxtParser();
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace Parse.Tests
         }
 
         [TestMethod]
-        //Test the email parser.
+        //Test the email parser with valid data.
         public void emailParseTest()
         {
 
@@ -93,7 +93,7 @@ namespace Parse.Tests
         }
 
         [TestMethod]
-        //Test the SIR parser.
+        //Test the SIR parser with valid data.
         public void SIRParseTest()
         {
 
@@ -119,7 +119,7 @@ namespace Parse.Tests
         }
 
         [TestMethod]
-        //Test the sms parser.
+        //Test the sms parser with valid data.
         public void smsParseTest()
         {
 
@@ -138,7 +138,7 @@ namespace Parse.Tests
         }
 
         [TestMethod]
-        //Test the tweet parser.
+        //Test the tweet parser with valid data.
         public void tweetParseTest()
         {
 
