@@ -1,0 +1,31 @@
+﻿<Page x:Class="NapierBankMessaging.Views.ViewSignificantIncidentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NapierBankMessaging.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1200"
+      Title="ViewSignificantIncidentsPage">
+
+    <Grid Background="White">
+        <Button x:Name="MainMenuBtn" Content="Return to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="925,16,0,0" FontSize="24" Click="MainMenuBtn_Click" RenderTransformOrigin="0.433,0.851"/>
+
+        <!--Header Labels-->
+        <Label Content="Significant Incidents" VerticalAlignment="Top" FontSize="24" Margin="490,10,489,0"/>
+
+        <!--ListView-->
+        <ListView x:Name="SIRList" Height="465" VerticalAlignment="Top" Margin="44,83,44,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Message ID" DisplayMemberBinding="{Binding messageID}"/>
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn Header="Incident" DisplayMemberBinding="{Binding Incident}"/>
+                    <GridViewColumn Header="Sort Code" DisplayMemberBinding="{Binding sortCode}"/>
+                    <GridViewColumn Header="Email Origin" DisplayMemberBinding="{Binding eAddress}"/>
+                    <GridViewColumn Header="Email Body" DisplayMemberBinding="{Binding messageBody}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>

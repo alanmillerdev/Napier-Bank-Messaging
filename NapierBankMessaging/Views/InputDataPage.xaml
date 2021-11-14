@@ -1,0 +1,39 @@
+﻿<Page x:Class="NapierBankMessaging.Views.InputDataPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NapierBankMessaging.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1200"
+      Title="InputDataPage">
+
+    <Grid Background="White">
+        <Button x:Name="MainMenuBtn" Content="Return to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="915,16,0,0" FontSize="24" Click="MainMenuBtn_Click"/>
+        <Label Content="Data Input" VerticalAlignment="Top" FontSize="24" Margin="539,10,539,0"/>
+        <Label Content="Input" VerticalAlignment="Top" FontSize="24" Margin="569,68,563,0"/>
+        <Label Content="Output" VerticalAlignment="Top" FontSize="24" Margin="969,68,147,0"/>
+        <Label Content="Instructions" VerticalAlignment="Top" FontSize="24" Margin="130,68,934,0"/>
+        <TextBox x:Name="InstructionBox" HorizontalAlignment="Left" Height="427" Margin="27,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="345" FontSize="17" IsEnabled="False"/>
+
+        <!--Message Header Input-->
+        <Label Content="Message Header:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="443,110,0,0"/>
+        <TextBox x:Name="MessageHeaderInput" HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="445,133,0,0" FontSize="24"/>
+
+        <!--Message Body Input-->
+        <Label Content="Message Body:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="445,172,0,0"/>
+        <TextBox x:Name="MessageBodyInput" HorizontalAlignment="Left" Height="287" Margin="445,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" FontSize="24"/>
+
+        <!--Submit Button-->
+        <Button x:Name="SubmitInputBtn" Content="Submit Data" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" Margin="508,501,0,0" FontSize="24" Click="SubmitInputBtn_Click"/>
+
+        <!--Message Header Output-->
+        <Label Content="Message ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="855,110,0,0"/>
+        <TextBox x:Name="MessageIDOutput" HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" Margin="855,133,0,0" FontSize="24" IsEnabled="False"/>
+
+        <!--Message Body Output-->
+        <Label Content="Message Body:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="855,175,0,0"/>
+        <TextBox x:Name="MessageBodyOutput" HorizontalAlignment="Left" Height="338" Margin="855,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="310" FontSize="24" IsEnabled="False"/>
+       
+    </Grid>
+</Page>

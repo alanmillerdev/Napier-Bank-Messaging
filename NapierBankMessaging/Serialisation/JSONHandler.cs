@@ -2,46 +2,46 @@
 using System.Collections.Generic;
 using System;
 using System.IO;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace NapierBankMessaging.Serialisation
 {
-    class JSONHandler
+    public class JSONHandler
     {
 
-        string dir = @"C:\Program Files\NapierBankMessaging";
-
-        string applicationDataStorageLocation = @"C:\Program Files\NapierBankMessaging\NapierBankMessagingStorage.JSON";
-
-        public string JSONInput(string filePath)
-        {
-
-            string jsonData = File.ReadAllText(filePath);
-
-            return jsonData;
-
-        }
+        string applicationDataStorageLocation = "ApplicationData.JSON";
 
         public List<Message> ReadApplicationData()
         {
 
-            string jsonData = File.ReadAllText(applicationDataStorageLocation);
+            List<Message> MessageList = new List<Message>();
 
-            List<Message> MessageList = JsonSerializer.Deserialize<List<Message>>(jsonData);
+            try
+            {
+                string jsonData = File.ReadAllText(applicationDataStorageLocation);
+
+                JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
+
+                MessageList = JsonConvert.DeserializeObject<List<Message>>(jsonData, settings);
+
+            } catch (Exception e)
+            {
+
+            }
 
             return MessageList;
 
         }
-
+        
         public void JSONOutput(List<Message> MessageList)
         {
 
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-            }
+            string jsonData = string.Empty;
 
-            string jsonData = JsonSerializer.Serialize(MessageList);
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto, Formatting = Formatting.Indented };
+
+            jsonData = JsonConvert.SerializeObject(MessageList, settings);
+
             File.WriteAllText(applicationDataStorageLocation, jsonData);
 
         }

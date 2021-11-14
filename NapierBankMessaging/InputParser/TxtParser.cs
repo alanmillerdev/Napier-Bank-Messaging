@@ -9,17 +9,12 @@ using NapierBankMessaging.Serialisation;
 namespace NapierBankMessaging.InputParser
 {
 
-    //TODO: Convert Parser to return one parsed message at a time
-    //Output object to JSON file at the same time for storage.
-    //Display parsed result via UI.
-    //This approach will allow for conversion of message with ease for manual input and file based input
-    //Once this is complete implement unit tests for serialisation and parsing
-    //Finally merge branches then start working on the UI.
-
     public class TxtParser
     {
 
         List<Message> ParsedMessages = new List<Message>();
+
+        Random random = new Random();
 
         public List<Message> TXTParser(string[] TxtData)
         {
@@ -48,7 +43,7 @@ namespace NapierBankMessaging.InputParser
                     } catch (FormatException)
                     {
                         //Invalid Data Error
-                        MessageBox.Show("It doesn't work");
+                        MessageBox.Show("Invalid Data Entered, Skipping Entry starting with: " + line.Split()[0]);
                     }
                 }
             }
@@ -64,10 +59,10 @@ namespace NapierBankMessaging.InputParser
 
             var chars = "0123456789";
             var stringChars = new char[8];
-            var random = new Random();
 
             for (int i = 0; i < stringChars.Length; i++)
             {
+                
                 stringChars[i] = chars[random.Next(chars.Length)];
             }
 
@@ -82,8 +77,8 @@ namespace NapierBankMessaging.InputParser
 
             string[] splitMsgBody = msgBody.Split();
 
-            //Needs better implementation
-            string csvFilePath = @"C:\Users\alanm\Downloads\textwords.csv";
+            //NEEDS BETTER IMPLEMENTATION
+            string csvFilePath = "textwords.csv";
 
             IDictionary<string, string> abbreviationList = CSVHandler.AbbreviationInput(csvFilePath);
 
@@ -93,7 +88,7 @@ namespace NapierBankMessaging.InputParser
                 if (abbreviationList.TryGetValue(val.ToUpper(), out string value))
                 {
 
-                    string replacementValue = "<" + value + "> ";
+                    string replacementValue = "<" + value + ">";
 
                     splitMsgBody = splitMsgBody.Select(s => s.Replace(val, replacementValue)).ToArray();
 
@@ -125,6 +120,14 @@ namespace NapierBankMessaging.InputParser
                 //Email Subject
                 emailSubject = splitLine[1];
 
+                if(emailSubject.Length > 20)
+                {
+
+                    MessageBox.Show("Email subject exceeds supported bounds.");
+                    break;
+
+                }
+
                 if(emailSubject == "SIR")
                 {
 
@@ -154,7 +157,7 @@ namespace NapierBankMessaging.InputParser
                     if (messageBody.Length > 1028)
                     {
 
-                        MessageBox.Show("Tweet body exceeds supported bounds.");
+                        MessageBox.Show("Email body exceeds supported bounds.");
                         break;
                     }
 
@@ -347,7 +350,7 @@ namespace NapierBankMessaging.InputParser
                 if (messageBody.Length > 140)
                 {
 
-                    MessageBox.Show("Tweet body exceeds supported bounds.");
+                    MessageBox.Show("The inputted message exceeds Twitters message bounds, are you sure you have entered it correctly?");
                     break;
                 }
 
@@ -361,7 +364,7 @@ namespace NapierBankMessaging.InputParser
 
                 if(username.Length > 16)
                 {
-                    MessageBox.Show("Twitter Username exceeds supported bounds.");
+                    MessageBox.Show("The inputted username is outwidth Twitters username bounds, are you sure you have entered it correctly?");
                     break;
                 }
 

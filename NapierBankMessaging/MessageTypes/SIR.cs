@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NapierBankMessaging.MessageTypes
 {
-    class SIR: Email
+    public class SIR: Email
     {
 
         public DateTime Date { get; set; }

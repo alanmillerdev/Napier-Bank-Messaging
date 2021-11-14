@@ -1,0 +1,29 @@
+﻿<Page x:Class="NapierBankMessaging.Views.ViewQuarantineListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:NapierBankMessaging.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1200"
+      Title="ViewQuarantineListPage">
+
+    <Grid Background="White">
+        <Button x:Name="MainMenuBtn" Content="Return to Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="927,16,0,0" FontSize="24" Click="MainMenuBtn_Click"/>
+
+        <!--Header Labels-->
+        <Label Content="Quarantine List" VerticalAlignment="Top" FontSize="24" Margin="513,10,513,0"/>
+        <ListView x:Name="QuarantineList" HorizontalAlignment="Left" Height="508" VerticalAlignment="Top" Width="491" Margin="354,57,0,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Message ID" DisplayMemberBinding="{Binding Item1}" Width="100"/>
+                    <GridViewColumn Header="URL" DisplayMemberBinding="{Binding Item2}" Width="391"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!--ListView-->
+
+
+    </Grid>
+</Page>
