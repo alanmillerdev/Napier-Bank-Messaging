@@ -41,7 +41,7 @@ namespace NapierBankMessaging.SystemController
             List<Message> returnedMessages = new List<Message>();
 
             OpenFileDialog file = new OpenFileDialog();
-            file.Filter = "txt Files (*.txt)|*.txt|All files (*.*)|*.*";
+            file.Filter = "txt Files (*.txt)|*.txt";
             file.InitialDirectory = @"c:\";
             file.FilterIndex = 1;
             file.Multiselect = false;

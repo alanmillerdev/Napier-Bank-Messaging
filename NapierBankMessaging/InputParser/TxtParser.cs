@@ -120,6 +120,14 @@ namespace NapierBankMessaging.InputParser
                 //Email Subject
                 emailSubject = splitLine[1];
 
+                if(emailSubject.Length > 20)
+                {
+
+                    MessageBox.Show("Email subject exceeds supported bounds.");
+                    break;
+
+                }
+
                 if(emailSubject == "SIR")
                 {
 
@@ -149,7 +157,7 @@ namespace NapierBankMessaging.InputParser
                     if (messageBody.Length > 1028)
                     {
 
-                        MessageBox.Show("Tweet body exceeds supported bounds.");
+                        MessageBox.Show("Email body exceeds supported bounds.");
                         break;
                     }
 
