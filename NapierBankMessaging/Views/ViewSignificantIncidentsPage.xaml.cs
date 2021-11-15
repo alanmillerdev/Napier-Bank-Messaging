@@ -23,23 +23,29 @@ namespace NapierBankMessaging.Views
     public partial class ViewSignificantIncidentsPage : Page
     {
 
+        //Initalising ControllerInstance
         Controller ControllerInstance;
 
+        //ViewSignificantIncidentsPage constructor
         public ViewSignificantIncidentsPage(SystemController.Controller controllerInstance)
         {
             InitializeComponent();
 
+            //Set the value of the ControllerInstance varible to the passed in controllerInstance
             ControllerInstance = controllerInstance;
 
+            //Calls the populateListView method that populates the significant incidents into the list view.
             PopulateListView();
 
         }
 
+        //Method to allow the user to return to the main menu.
         private void MainMenuBtn_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new MainMenuPage(ControllerInstance));
         }
 
+        //PopulateListView method that is responsible for populating the list view with SIR's.
         private void PopulateListView()
         {
             List<SIR> sirList = ControllerInstance.getSIRList();
