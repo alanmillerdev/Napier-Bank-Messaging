@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace NapierBankMessaging.MessageTypes
 {
+    //Email message type, inherits from Message parent class.
     public class Email: Message
     {
-
+        //Declares attributes and initalises getters and setters.
         public string eAddress { get; set; }
         public string eSubject { get; set; }
         public string[] qURLS { get; set; }
 
+        //Constructor
         public Email()
         {
 
@@ -24,6 +26,7 @@ namespace NapierBankMessaging.MessageTypes
 
         }
 
+        //Constructor
         public Email(string email, string subject, string[] urls, string msgID, string msgBody) : base(msgID, msgBody)
         {
 

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace NapierBankMessaging.MessageTypes
 {
+    //SMS message type, inherits from Message parent class.
     public class SMS : Message
     {
-
+        //Declares attributes and initalises getters and setters.
         public string pNumber { get; set; }
 
+        //Constructor
         public SMS()
         {
 
@@ -20,6 +22,7 @@ namespace NapierBankMessaging.MessageTypes
 
         }
 
+        //Constructor
         public SMS(string phoneNo, string msgID, string msgBody) : base(msgID, msgBody)
         {
 

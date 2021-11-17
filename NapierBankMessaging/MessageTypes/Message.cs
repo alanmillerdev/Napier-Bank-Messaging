@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace NapierBankMessaging.MessageTypes
 {
+    //Message Class that holds the base attributes of all of the child message types within the system.
+    //Including MessageID and MessageBody
     public class Message
     {
-
+        //Declaring the Class Attributes
         public string messageID { get; set; }
         public string messageBody { get; set; }
 
+        //Constructor
         public Message()
         {
 
@@ -20,6 +23,7 @@ namespace NapierBankMessaging.MessageTypes
 
         }
 
+        //Constructor
         public Message(string msgID, string msgBody)
         {
 

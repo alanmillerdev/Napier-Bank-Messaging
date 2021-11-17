@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace NapierBankMessaging.MessageTypes
 {
+    //Tweet message type, inherits from Message parent class.
     public class Tweet : Message
     {
-
+        //Declares attributes and initalises getters and setters.
         public string tUsername { get; set; }
         public string [] hashtags {get; set;}
         public string[] mentions { get; set; }
 
+        //Constructor
         public Tweet() : base()
         {
             tUsername = null;
@@ -23,6 +25,7 @@ namespace NapierBankMessaging.MessageTypes
 
         }
 
+        //Constructor
         public Tweet(string username, string [] tags, string [] ments, string msgID, string msgBody) : base(msgID, msgBody)
         {
 
