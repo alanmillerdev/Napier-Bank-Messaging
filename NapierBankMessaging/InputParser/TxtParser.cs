@@ -12,25 +12,30 @@ namespace NapierBankMessaging.InputParser
     public class TxtParser
     {
 
+        //Declares and Initalises ParsedMessages that is returned at the end of the parsing process.
         List<Message> ParsedMessages = new List<Message>();
 
+        //Creates a new Random instance that is used to generate Uniqiue MessageID's
         Random random = new Random();
 
+        //TXTParser Method that is used to Parse and Return Messages.
         public List<Message> TXTParser(string[] TxtData)
         {
-
+            //For each line in txtData
             foreach (string line in TxtData)
             {
-
+                //If the first character is +, the system will think it's a number.
                 if (line.Split()[0].StartsWith("+"))
                 {
 
                     SMSParser(line);
 
+                    //If the first character is an @, the system will think it's a twitter username.
                 } else if (line.Split()[0].StartsWith("@"))
                 {
                     TweetParser(line);
                 }
+                //Else, the system will try and parse a email.
                 else
                 {
                     try
@@ -39,7 +44,7 @@ namespace NapierBankMessaging.InputParser
                         new MailAddress(line.Split()[0]);
 
                         EmailParser(line);
-
+                    //If none of the types are met, a message will be displayed to the user.
                     } catch (FormatException)
                     {
                         //Invalid Data Error
@@ -48,10 +53,12 @@ namespace NapierBankMessaging.InputParser
                 }
             }
 
+            //Return ParsedMessages List.
             return ParsedMessages;
 
         }
 
+        //MessageIDBuilder method, uses random to generate random ID's for messages.
         public string MessageIDBuilder(string type)
         {
 
@@ -70,21 +77,27 @@ namespace NapierBankMessaging.InputParser
 
         }
 
+        //AbbreviationCheck method, is used to check certain message bodys for textspeak abbreviations.
         public string AbbreviationCheck(string msgBody)
         {
 
+            //Creates a CSVHandler instance.
             var CSVHandlerInstance = new CSVHandler();
 
+            //Splits the message body by spaces and stores in an array.
             string[] splitMsgBody = msgBody.Split();
 
             //NEEDS BETTER IMPLEMENTATION
+            //CSV File Path
             string csvFilePath = "textwords.csv";
 
+            //Creates a Dictionary of abbreviations.
             IDictionary<string, string> abbreviationList = CSVHandler.AbbreviationInput(csvFilePath);
 
+            //for each value in the split message body.
             foreach(string val in splitMsgBody)
             {
-
+                //If the abbreviation list has a value that matches the current val, replace the textspeak with the real value.
                 if (abbreviationList.TryGetValue(val.ToUpper(), out string value))
                 {
 
@@ -94,34 +107,42 @@ namespace NapierBankMessaging.InputParser
 
                 }
             }
+            //Join the message body and return it.
             return msgBody = string.Join(" ", splitMsgBody);
         }
 
+        //EmailParser Method, used to parse email, is passed a line of data that has not been parsed at all.
         public void EmailParser(string preParseLine)
         {
 
+            //Declare the data required as part of the constructor for the email.
             string messageID;
             string messageBody;
             string emailAddress;
             string emailSubject;
             string[] quarantinedURLs;
 
+            //Creates a new Email Object.
             Email EmailParsed = new Email();
 
+            //Splits the passed in data.
             string[] splitLine = preParseLine.Split();
 
+            //Declares checkedMessageBody as null.
             string[] checkedMessageBody = null;
 
+            //Temp URL List, holds URL's that have been found within the message body.
             List<string> tempURLList = new List<string>();
 
             do
             {
-
+                //Try to parse the body, catches any errors that could occur and displays an error message.
                 try
                 {
                     //Email Subject
                     emailSubject = splitLine[1];
 
+                    //If the email subject length is greater than 20 then the system will display an error message and move on to the next message.
                     if (emailSubject.Length > 20)
                     {
 
@@ -130,6 +151,7 @@ namespace NapierBankMessaging.InputParser
 
                     }
 
+                    //If the email Subject is equal to SIR, the SIRParser is called.
                     if (emailSubject == "SIR")
                     {
 
@@ -139,15 +161,13 @@ namespace NapierBankMessaging.InputParser
                     else
                     {
 
-                        //MessageID
-
+                        //Gets the messageID for the message, passes it the message type "E".
                         messageID = MessageIDBuilder("E");
 
-                        //Email Address
+                        //Sets the email address.
                         emailAddress = splitLine[0];
 
-                        //MessageBody
-
+                        //Sets the message body.
                         List<string> tempList = new List<string>();
                         for (int i = 2; i < splitLine.Length; i++)
                         {
@@ -164,10 +184,11 @@ namespace NapierBankMessaging.InputParser
                             break;
                         }
 
-                        //URL Check
-
+                        //Checks the body of the message for URLs
                         string[] splitMessageBody = messageBody.Split();
 
+                        //For each value in split message body, if the value starts with http:// or https:// the value is added to the quarantine list
+                        //The value is then replaced in the message body to the replacementValue.
                         foreach (string val in splitMessageBody)
                         {
                             if (val.StartsWith("http://") || val.StartsWith("https://"))
@@ -182,21 +203,26 @@ namespace NapierBankMessaging.InputParser
                             }
                         }
 
+                        //If the messageBody is empty, skip the current entry.
                         if (messageBody == string.Empty)
                         {
                             MessageBox.Show("Invalid Message Body, Try Again.");
                             break;
                         }
 
+                        //Else join the message body with the parsed checkedMessageBody.
                         messageBody = string.Join(" ", checkedMessageBody);
 
-                        //Quarantined URLs
+                        //Set Quarantined URLs to quarantinedURLs variable
                         quarantinedURLs = tempURLList.ToArray();
 
+                        //Build Email Object.
                         EmailParsed = new Email(emailAddress, emailSubject, quarantinedURLs, messageID, messageBody);
 
+                        //Add the new Email Object to the ParsedMessages List.
                         ParsedMessages.Add(EmailParsed);
                     }
+                    //Catch any exceptions from the message body.
                 } catch (Exception err)
                 {
                     MessageBox.Show("Invalid Message Body, Please Try Again.");
