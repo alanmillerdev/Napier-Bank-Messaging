@@ -68,7 +68,9 @@ namespace NapierBankMessaging.Views
                 {
                     MessageIDOutput.Text = MessageList[0].messageID;
                     MessageBodyOutput.Text = MessageList[0].messageBody;
+#pragma warning disable CS0168 // The variable 'err' is declared but never used
                 } catch (ArgumentOutOfRangeException err)
+#pragma warning restore CS0168 // The variable 'err' is declared but never used
                 {
 
                 }
