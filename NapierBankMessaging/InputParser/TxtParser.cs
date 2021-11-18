@@ -197,9 +197,7 @@ namespace NapierBankMessaging.InputParser
 
                         ParsedMessages.Add(EmailParsed);
                     }
-#pragma warning disable CS0168 // The variable 'err' is declared but never used
                 } catch (Exception err)
-#pragma warning restore CS0168 // The variable 'err' is declared but never used
                 {
                     MessageBox.Show("Invalid Message Body, Please Try Again.");
                     break;
@@ -291,10 +289,7 @@ namespace NapierBankMessaging.InputParser
                     SIRParsed = new SIR(date, sortCode, incident, emailAddress, emailSubject, urls, messageID, messageBody);
 
                     ParsedMessages.Add(SIRParsed);
-
-#pragma warning disable CS0168 // The variable 'err' is declared but never used
                 } catch (Exception err)
-#pragma warning restore CS0168 // The variable 'err' is declared but never used
                 {
                     MessageBox.Show("Invalid Message Body, Please Try Again.");
                     break;
@@ -346,10 +341,7 @@ namespace NapierBankMessaging.InputParser
                     SMSParsed = new SMS(sender, messageID, messageBody);
 
                     ParsedMessages.Add(SMSParsed);
-
-#pragma warning disable CS0168 // The variable 'err' is declared but never used
                 } catch (Exception err)
-#pragma warning restore CS0168 // The variable 'err' is declared but never used
                 {
                     MessageBox.Show("Invalid Message Body, Please Try Again.");
                     break;
@@ -443,9 +435,7 @@ namespace NapierBankMessaging.InputParser
 
                     ParsedMessages.Add(TweetParsed);
                 }
-#pragma warning disable CS0168 // The variable 'err' is declared but never used
-                catch (Exception err)
-#pragma warning restore CS0168 // The variable 'err' is declared but never used
+                catch (Exception)
                 {
                     MessageBox.Show("Invalid Message Body, Please Try Again.");
                     break;

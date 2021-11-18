@@ -24,10 +24,6 @@ namespace NapierBankMessaging.SystemController
             //MessageList loads in the applicationData if available.
             MessageList = loadApplicationData();
 
-            if(MessageList == null)
-            {
-                MessageList = new List<Message>();
-            }
         }
 
         //loadApplicationData methods, responsible for loading in data to the system.
@@ -36,6 +32,11 @@ namespace NapierBankMessaging.SystemController
             
             //Stores the Read in application data in the MessageList variable.
             MessageList = jsonHandler.ReadApplicationData();
+
+            if(MessageList == null)
+            {
+                MessageList = new List<Message>();
+            }
 
             //Returns Message List.
             return MessageList;
