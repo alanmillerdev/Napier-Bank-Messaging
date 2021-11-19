@@ -234,7 +234,7 @@ namespace NapierBankMessaging.InputParser
 
         private void SIRParser(string preParseLine)
         {
-
+            //Declares SIR attributes for use in the constructor
             string messageID = string.Empty;
             string messageBody = string.Empty;
             string[] urls = null;
@@ -244,40 +244,43 @@ namespace NapierBankMessaging.InputParser
             string sortCode = string.Empty;
             string incident = string.Empty;
 
+            //Creates new SIR object.
             SIR SIRParsed = new SIR();
 
+            //Declares checkedMessageBody as null.
             string[] checkedMessageBody = null;
 
+            //Declares new Temp URL list.
             List<string> tempURLList = new List<string>();
 
+            //declares and initalises the splitLine array which holds the split preParseLine
             string[] splitLine = preParseLine.Split();
 
             do
             {
 
-                //MessageID
-
+                //Gets the messageID for the message, passes it the message type "E".
                 messageID = MessageIDBuilder("E");
 
-                //Email Address
+                //Sets the email address.
                 emailAddress = splitLine[0];
 
                 try
                 {
 
-                    //Subject
+                    //sets the emailSubject
                     emailSubject = splitLine[1];
 
-                    //Date
+                    //date parses the splitLine data.
                     date = DateTime.Parse(splitLine[2]);
 
-                    //SortCode
+                    //sets the sortCode
                     sortCode = splitLine[3];
 
-                    //Incident
+                    //sets the Incident
                     incident = splitLine[4];
 
-                    //MessageBody
+                    //Combines the MessageBody
                     List<string> tempList = new List<string>();
                     for (int i = 5; i < splitLine.Length; i++)
                     {
@@ -286,8 +289,7 @@ namespace NapierBankMessaging.InputParser
 
                     messageBody = string.Join(" ", tempList.ToArray());
 
-                    //URL Check
-
+                    //URL Check - Same as Email section
                     string[] splitMessageBody = messageBody.Split();
 
                     foreach (string val in splitMessageBody)
@@ -312,9 +314,11 @@ namespace NapierBankMessaging.InputParser
                     //Quarantined URLs
                     urls = tempURLList.ToArray();
 
+                    //Builds SIR using Constructor
                     SIRParsed = new SIR(date, sortCode, incident, emailAddress, emailSubject, urls, messageID, messageBody);
 
                     ParsedMessages.Add(SIRParsed);
+                    //If any Exception occurs within the message body
                 } catch (Exception err)
                 {
                     MessageBox.Show("Invalid Message Body, Please Try Again.");
@@ -327,30 +331,29 @@ namespace NapierBankMessaging.InputParser
 
         private void SMSParser(string preParseLine)
         {
-
+            //Declares SMS attributes for use in the constructor
             string messageID;
             string messageBody;
             string sender;
 
+            //Decalres a new SMS and stores it as SMS Parsed
             SMS SMSParsed = new SMS();
 
+            //Declares and Initalises splitLine as the split preParseLine
             string[] splitLine = preParseLine.Split();
 
             do
             {
-
-                //MessageID
-
+                //Gets the messageID for the message, passes it the message type "S".
                 messageID = MessageIDBuilder("S");
 
-                //Sender
+                //Sets the phone number
                 sender = splitLine[0];
 
                 try
                 {
 
-                    //MessageBody
-
+                    //Recombine the message body.
                     List<string> tempList = new List<string>();
                     for (int i = 1; i < splitLine.Length; i++)
                     {
@@ -364,9 +367,12 @@ namespace NapierBankMessaging.InputParser
 
                     messageBody = checkResult;
 
+                    //Build and output SMS object.
                     SMSParsed = new SMS(sender, messageID, messageBody);
 
                     ParsedMessages.Add(SMSParsed);
+                    //If any errors occur in the message body parsing process, the error is caught and
+                    //an error message is displayed 
                 } catch (Exception err)
                 {
                     MessageBox.Show("Invalid Message Body, Please Try Again.");
@@ -376,28 +382,32 @@ namespace NapierBankMessaging.InputParser
             while (SMSParsed == null);
         }
 
+        //TweetParser Method, responsible for parsing tweets.
         private void TweetParser(string preParseLine)
         {
 
+            //Declares and Initalises the attributes used to build a tweet object.
             string messageID;
             string messageBody;
             string username;
             string[] mentions;
             string[] hashtags;
 
+            //Creates a TweetParsed object.
             Tweet TweetParsed = new Tweet();
 
+            //Splits the preParseLine and stores it in splitLine.
             string[] splitLine = preParseLine.Split();
 
             do
             {
-                //MessageID
-
+                //Gets the messageID for the message, passes it the message type "T".
                 messageID = MessageIDBuilder("T");
 
-                //Username
+                //Sets the username
                 username = splitLine[0];
 
+                //If the username length is greater than 16 characters display an error message to the user.
                 if (username.Length > 16)
                 {
                     MessageBox.Show("The inputted username is outwidth Twitters username bounds, are you sure you have entered it correctly?");
@@ -406,7 +416,7 @@ namespace NapierBankMessaging.InputParser
 
                 try
                 {
-                    //MessageBody
+                    //Rebuild the message body as a string.
 
                     List<string> tempList = new List<string>();
                     for (int i = 1; i < splitLine.Length; i++)
@@ -417,6 +427,7 @@ namespace NapierBankMessaging.InputParser
                     messageBody = string.Join(" ", tempList.ToArray());
 
                     //Message Body Length Check
+                    //If the message body length is greater than 140 an error message is displayed to the user.
                     if (messageBody.Length > 140)
                     {
 
@@ -427,14 +438,14 @@ namespace NapierBankMessaging.InputParser
                     //Message Body Text Speak Conversion
                     string checkResult = AbbreviationCheck(messageBody);
 
+                    //Sets the message body to the Abbreviation Checked Body.
                     messageBody = checkResult;
 
-                    //Mentions
-
+                    //Checks the message body for mentions.
                     List<String> tempMentionsList = new List<string>();
                     foreach (string val in messageBody.Split())
                     {
-
+                        //If a word starts with @, the system will add that word to the mentions array.
                         if (val.StartsWith("@"))
                         {
                             tempMentionsList.Add(val);
@@ -443,12 +454,11 @@ namespace NapierBankMessaging.InputParser
 
                     mentions = tempMentionsList.ToArray();
 
-                    //Hashtags
-
+                    //Checks the message body for hashtags. 
                     List<String> tempHashtagList = new List<string>();
                     foreach (string val in messageBody.Split())
                     {
-
+                        //If a word starts with #, the system will add that word to the hashtag array.
                         if (val.StartsWith("#"))
                         {
                             tempHashtagList.Add(val);
@@ -457,10 +467,12 @@ namespace NapierBankMessaging.InputParser
 
                     hashtags = tempHashtagList.ToArray();
 
+                    //Outputting the Processed Tweet.
                     TweetParsed = new Tweet(username, hashtags, mentions, messageID, messageBody);
 
                     ParsedMessages.Add(TweetParsed);
                 }
+                //If any errors occur in the message body processing they will be caught here.
                 catch (Exception)
                 {
                     MessageBox.Show("Invalid Message Body, Please Try Again.");
